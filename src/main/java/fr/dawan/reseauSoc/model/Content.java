@@ -1,6 +1,6 @@
-package fr.dawan.reseauSoc.beans;
+package fr.dawan.reseauSoc.model;
 
-public class Content {
+public abstract class Content {
 	
 	private Integer id;
 	private String name;
