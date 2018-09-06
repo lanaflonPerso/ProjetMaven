@@ -13,6 +13,9 @@ public class GroupMusic extends CulturalContent {
 	 * *********CONSTRUCTORS
 	 */	
 	
+	public GroupMusic() {
+	}
+
 	public GroupMusic(List<PeopleContent> members) {
 		super();
 		this.members = members;
