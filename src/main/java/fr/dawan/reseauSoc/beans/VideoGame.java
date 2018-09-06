@@ -11,6 +11,10 @@ public class VideoGame extends CulturalContent{
 	 * *********CONSTRUCTORS
 	 */	
 	
+	public VideoGame() {
+		
+	}
+	
 	public VideoGame(List<String> platform, int numPlayer) {
 		super();
 		this.platform = platform;
