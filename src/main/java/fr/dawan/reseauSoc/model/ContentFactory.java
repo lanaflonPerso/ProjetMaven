@@ -8,28 +8,40 @@ import fr.dawan.reseauSoc.beans.PeopleContent;
 import fr.dawan.reseauSoc.beans.Song;
 import fr.dawan.reseauSoc.beans.VideoGame;
 
+
+/**
+ * A factory for creating Content objects.
+ */
 public class ContentFactory {
 	
+	
+	
+	/**
+	 * Factory d'objet hérités de content .
+	 *
+	 * @param type : ContentEnum afin
+	 * @return l'objet du type passé en parametre
+	 */
 	public Content createContent(ContentsEnum type) {
+		Content c = null;
 		switch (type) {
 		case Album:
-			return new Album();
+			c=new Album();
 			
 		case GroupMusic:
-			return new GroupMusic();
+			c=new GroupMusic();
 		
 		case PeopleContent:
-			return new PeopleContent();
+			c=new PeopleContent();
 			
 		case Song: 
-			return new Song();
+			c=new Song();
 			
 		case VideoGame:
-			return new VideoGame();
-			
-		default:
-			break;
+			c=new VideoGame();	
 		}
+		return c;
+		
 	}
 	
 }

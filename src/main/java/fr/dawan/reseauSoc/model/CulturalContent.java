@@ -1,8 +1,10 @@
-package fr.dawan.reseauSoc.beans;
+package fr.dawan.reseauSoc.model;
 
 import java.time.LocalDate;
 
-public class CulturalContent extends Content {
+import fr.dawan.reseauSoc.beans.Category;
+
+public abstract class CulturalContent extends Content {
 	
 	private LocalDate releaseDate;
 	private Category category;
