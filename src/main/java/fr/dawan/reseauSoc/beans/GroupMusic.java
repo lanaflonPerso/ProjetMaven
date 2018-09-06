@@ -2,14 +2,14 @@ package fr.dawan.reseauSoc.beans;
 
 import java.util.List;
 
-import CulturalContent;
+import fr.dawan.reseauSoc.model.CulturalContent;
 
 /**
  * The Class GroupMusic.
  */
 public class GroupMusic extends CulturalContent {
 
-	/** liste de membre du groupe, une chanteuse par exemple est consird�e comme un groupe d'une personne. */
+	/** liste de membre du groupe, une chanteuse par exemple est consirdere comme un groupe d'une personne. */
 	private List<PeopleContent> members;
 
 	
