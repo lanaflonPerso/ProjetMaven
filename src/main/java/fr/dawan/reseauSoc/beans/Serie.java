@@ -2,7 +2,7 @@ package fr.dawan.reseauSoc.beans;
 
 import java.util.List;
 
-public class Serie {
+public class Serie extends CulturalContent {
 
 	private List<PeopleContent> showRunners;
 	private List<Episode> episodes;
