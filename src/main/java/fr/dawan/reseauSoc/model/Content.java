@@ -14,7 +14,7 @@ public abstract class Content {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 	public void setNom(String name) {
