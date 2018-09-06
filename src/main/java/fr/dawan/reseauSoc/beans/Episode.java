@@ -1,6 +1,6 @@
 package fr.dawan.reseauSoc.beans;
 
-public class Episode {
+public class Episode extends Video {
 
 	private int season;
 	private int number;
