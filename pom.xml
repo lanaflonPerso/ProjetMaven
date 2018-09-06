@@ -11,8 +11,8 @@
 
 	<repositories>
 		<repository>
-			<id>JacksonRepo</id>
-			<url>https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core</url>
+			<id>JacksonRepo2</id>
+			<url>https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind</url>
 		</repository>
 	</repositories>
 
@@ -44,7 +44,7 @@
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
+			<artifactId>jackson-databind</artifactId>
 			<version>2.9.6</version>
 		</dependency>
 
