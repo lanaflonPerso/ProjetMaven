@@ -22,25 +22,25 @@ public class ContentFactory {
 	 * @return l'objet du type passé en parametre
 	 */
 	public Content createContent(ContentsEnum type) {
+		Content c = null;
 		switch (type) {
 		case Album:
-			return new Album();
+			c=new Album();
 			
 		case GroupMusic:
-			return new GroupMusic();
+			c=new GroupMusic();
 		
 		case PeopleContent:
-			return new PeopleContent();
+			c=new PeopleContent();
 			
 		case Song: 
-			return new Song();
+			c=new Song();
 			
 		case VideoGame:
-			return new VideoGame();
-			
-		default:
-			break;
+			c=new VideoGame();	
 		}
+		return c;
+		
 	}
 	
 }
