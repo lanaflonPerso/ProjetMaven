@@ -1,3 +1,4 @@
+package fr.dawan.reseauSoc.beans;
 import java.util.List;
 
 public class VideoGame extends CulturalContent{
