@@ -8,8 +8,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>reseauSocial Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<dependencies>
 
+	<repositories>
+		<repository>
+			<id>JacksonRepo2</id>
+			<url>https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -33,6 +40,12 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
 			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
 		</dependency>
 
 	</dependencies>

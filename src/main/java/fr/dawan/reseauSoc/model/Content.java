@@ -3,7 +3,7 @@ package fr.dawan.reseauSoc.model;
 public abstract class Content {
 	
 	private Integer id;
-	private String nom;
+	private String name;
 	
 	/*
 	 * *********GETTERS/SETTERS
@@ -14,10 +14,10 @@ public abstract class Content {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNom(String name) {
+		this.name = name;
 	}
 }

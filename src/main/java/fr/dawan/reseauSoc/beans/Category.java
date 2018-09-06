@@ -8,6 +8,11 @@ import java.io.Serializable;
  */
 public class Category implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 844203126347475267L;
+
 	/** The id. */
 	private int id;
 	

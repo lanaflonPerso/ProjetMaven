@@ -5,4 +5,9 @@ package fr.dawan.reseauSoc.beans;
  */
 public class Admin extends User {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6592164384628184890L;
+
 }
