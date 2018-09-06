@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.dawan.reseauSoc.Enum.Fonction;
+import fr.dawan.reseauSoc.model.Content;
 
 /**
  * The Class PeopleContent.

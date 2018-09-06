@@ -1,6 +1,8 @@
 package fr.dawan.reseauSoc.beans;
 import java.util.List;
 
+import fr.dawan.reseauSoc.model.CulturalContent;
+
 /**
  * The Class VideoGame.
  */
