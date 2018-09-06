@@ -1,5 +1,6 @@
 package fr.dawan.reseauSoc.beans;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.dawan.reseauSoc.model.CulturalContent;
@@ -9,7 +10,7 @@ import fr.dawan.reseauSoc.model.CulturalContent;
  */
 public class GroupMusic extends CulturalContent {
 
-	/** liste de membre du groupe, une chanteuse par exemple est consirdere comme un groupe d'une personne. */
+	/** liste de membre du groupe, une chanteuse par exemple est considere comme un groupe d'une personne. */
 	private List<PeopleContent> members;
 
 	
@@ -21,6 +22,12 @@ public class GroupMusic extends CulturalContent {
 	 * Instantiates a new group music.
 	 */
 	public GroupMusic() {
+	}
+	
+	public GroupMusic(Integer id, String name, LocalDate releaseDate, Category category, String studio,
+			List<PeopleContent> members) {
+		super(id, name, releaseDate, category, studio);
+		this.members = members;
 	}
 
 	/**

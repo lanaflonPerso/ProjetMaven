@@ -11,6 +11,21 @@ public abstract class CulturalContent extends Content {
 	private String studio;
 	
 	/*
+	 * *********CONSTRUCTORS
+	 */
+	
+	public CulturalContent() {
+		super();
+	}
+	
+	public CulturalContent(Integer id, String name, LocalDate releaseDate, Category category, String studio) {
+		super(id, name);
+		this.releaseDate = releaseDate;
+		this.category = category;
+		this.studio = studio;
+	}
+
+	/*
 	 * *********GETTERS/SETTERS
 	 */
 	public LocalDate getReleaseDate() {
