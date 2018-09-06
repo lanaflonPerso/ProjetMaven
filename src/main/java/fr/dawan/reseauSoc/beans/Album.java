@@ -1,12 +1,21 @@
 package fr.dawan.reseauSoc.beans;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
  * The Class Album.
  */
-public class Album extends GroupMusic {
+/**
+ * @author Pierre
+ *
+ */
+public class Album extends GroupMusic implements Serializable {
 	
+	/** Serialisation ID */
+	private static final long serialVersionUID = -4710312449379468329L;
+
 	/** The artist. */
 	private GroupMusic artist;
 	
@@ -22,7 +31,15 @@ public class Album extends GroupMusic {
 	public Album() {
 		
 	}
-	
+
+	public Album(Integer id, String name, LocalDate releaseDate, Category category, String studio,
+			List<PeopleContent> members, GroupMusic artist, List<Song> songs) {
+		super(id, name, releaseDate, category, studio, members);
+		this.artist = artist;
+		this.songs = songs;
+	}
+
+
 	/**
 	 * Instantiates a new album.
 	 *

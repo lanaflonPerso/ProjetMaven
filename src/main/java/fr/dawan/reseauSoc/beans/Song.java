@@ -1,8 +1,13 @@
 package fr.dawan.reseauSoc.beans;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  * The Class Song.
  */
+
+
 public class Song extends GroupMusic {
 	
 	/** numero de piste. */
@@ -21,7 +26,24 @@ public class Song extends GroupMusic {
 	public Song() {
 		
 	}
-	
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param releaseDate
+	 * @param category
+	 * @param studio
+	 * @param members
+	 * @param number
+	 * @param duration
+	 */
+	public Song(Integer id, String name, LocalDate releaseDate, Category category, String studio,
+			List<PeopleContent> members, int number, int duration) {
+		super(id, name, releaseDate, category, studio, members);
+		this.number = number;
+		this.duration = duration;
+	}
+
 	/**
 	 * Instantiates a new song.
 	 *
@@ -33,6 +55,8 @@ public class Song extends GroupMusic {
 		this.number = number;
 		this.duration = duration;
 	}
+	
+	
 
 	/*
 	 * *********GETTERS/SETTERS

@@ -6,6 +6,19 @@ public abstract class Content {
 	private String name;
 	
 	/*
+	 * *********CONSTRUCTORS
+	 */
+	
+	public Content() {
+		super();
+	}
+	public Content(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	/*
 	 * *********GETTERS/SETTERS
 	 */
 	public Integer getId() {
