@@ -6,9 +6,15 @@ import junit.framework.TestCase;
 
 public class AlbumTest extends TestCase {
 
+	
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testConstructeurDefault() {
+		Album al = new Album();
+		System.out.println(al.getClass());
+		assertNotNull(al);
+		assertEquals(al.getNom(), null);
 	}
+	
 
 }
