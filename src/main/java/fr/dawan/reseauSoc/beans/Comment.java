@@ -8,6 +8,11 @@ import java.io.Serializable;
  */
 public class Comment implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3365182941485779192L;
+
 	/** The id. */
 	private int id;
 	

@@ -10,6 +10,11 @@ import java.util.List;
  */
 public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8128611887962085319L;
+
 	/** The id. */
 	private int id;
 	
