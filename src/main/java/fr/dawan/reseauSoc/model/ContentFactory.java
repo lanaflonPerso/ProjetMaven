@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.model;
 
 import fr.dawan.reseauSoc.Enum.ContentsEnum;
 import fr.dawan.reseauSoc.beans.Album;
+import fr.dawan.reseauSoc.beans.Content;
 import fr.dawan.reseauSoc.beans.GroupMusic;
 import fr.dawan.reseauSoc.beans.PeopleContent;
 import fr.dawan.reseauSoc.beans.Song;
