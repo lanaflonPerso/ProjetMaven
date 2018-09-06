@@ -3,7 +3,6 @@ package fr.dawan.reseauSoc.beans;
 import java.time.LocalDate;
 import java.util.List;
 
-import Content;
 import fr.dawan.reseauSoc.Enum.Fonction;
 
 public class PeopleContent extends Content {

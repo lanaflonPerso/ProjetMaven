@@ -2,8 +2,6 @@ package fr.dawan.reseauSoc.beans;
 
 import java.util.List;
 
-import CulturalContent;
-
 public class GroupMusic extends CulturalContent {
 
 	private List<PeopleContent> members;

@@ -2,7 +2,7 @@ package fr.dawan.reseauSoc.beans;
 
 import java.time.LocalDate;
 
-public class CulturalContent {
+public class CulturalContent extends Content {
 	
 	private LocalDate releaseDate;
 	private Category category;
