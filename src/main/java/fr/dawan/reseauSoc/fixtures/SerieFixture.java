@@ -15,7 +15,6 @@ public class SerieFixture {
 
 	public SerieFixture() {
 		super();
-		Serie serieCodeQuantium= new Serie();
 		serieCodeQuantium.setId(1);
 		serieCodeQuantium.setNom("Code Quantium");
 		Category catSF= new Category();
@@ -26,7 +25,6 @@ public class SerieFixture {
 
 		serieCodeQuantium.setReleaseDate(LocalDate.of(1989, 1, 1));
 		
-		Serie serieMagnum= new Serie();
 		serieMagnum.setId(2);
 		serieMagnum.setNom("Magnum");
 		Category catpoliciere= new Category();
@@ -37,7 +35,6 @@ public class SerieFixture {
 
 		serieMagnum.setReleaseDate(LocalDate.of(1980, 1, 1));
 	}
-
 
 	public List<Serie> listSerie() {
 		
