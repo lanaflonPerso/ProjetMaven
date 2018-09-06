@@ -9,6 +9,10 @@ public class Song extends GroupMusic {
 	 * *********CONSTRUCTORS
 	 */	
 	
+	public Song() {
+		
+	}
+	
 	public Song(int number, int duration) {
 		super();
 		this.number = number;

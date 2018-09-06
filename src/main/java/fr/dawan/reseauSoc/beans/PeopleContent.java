@@ -17,6 +17,10 @@ public class PeopleContent extends Content {
 	 * *********CONSTRUCTORS
 	 */	
 	
+	public PeopleContent() {
+		
+	}
+	
 	public PeopleContent(String firstName, String nickName, LocalDate birthDay, List<Fonction> fonctions) {
 		super();
 		this.firstName = firstName;

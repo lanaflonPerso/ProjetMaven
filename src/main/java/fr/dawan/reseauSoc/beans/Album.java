@@ -10,6 +10,9 @@ public class Album extends GroupMusic {
 	/*
 	 * *********CONSTRUCTORS
 	 */	
+	public Album() {
+		
+	}
 	
 	public Album(GroupMusic artist, List<Song> songs) {
 		super();
