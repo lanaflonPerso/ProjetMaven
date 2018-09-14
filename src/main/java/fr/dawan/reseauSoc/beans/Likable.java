@@ -14,11 +14,25 @@ import javax.persistence.Table;
 @Inheritance(strategy=InheritanceType.JOINED) 
 public class Likable {
 
-	   @Id  
-	   @GeneratedValue(strategy=GenerationType.AUTO)     
-	   @Column(name = "id")  
-	   private int id;
+	@Id  
+	@GeneratedValue(strategy=GenerationType.AUTO)     
+	@Column(name = "id")  
+	private int id;
+	private int likeCount;
+	private int dislikeCount;
+	
+	public Likable() {
+		super();
+	}
 
+	public Likable(int id) {
+		super();
+		this.id = id;
+	}
+
+	/* ****************************************************************************************
+	 * ****************************GETTERS / SETTERS*******************************************
+	 * ***************************************************************************************/
 	public int getId() {
 		return id;
 	}
@@ -26,4 +40,23 @@ public class Likable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getDislikeCount() {
+		return dislikeCount;
+	}
+	public void setDislikeCount(int dislikeCount) {
+		this.dislikeCount = dislikeCount;
+	}
+
+	@Override
+	public String toString() {
+		return "Likable [id=" + id + ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount + "]";
+	}
+	
+	
 }

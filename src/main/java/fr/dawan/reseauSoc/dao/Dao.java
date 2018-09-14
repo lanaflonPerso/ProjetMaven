@@ -10,12 +10,11 @@ import org.hibernate.cfg.Configuration;
 
 public class Dao {
 
-	private static SessionFactory sessionFactory;
+	protected static SessionFactory sessionFactory;
 	private static Session session;
 	
 	public static <T> void save(T bean) {
-		session();
-		Transaction tx = session.beginTransaction();
+		Transaction tx = session().beginTransaction();
 
 		session.save(bean);
 		

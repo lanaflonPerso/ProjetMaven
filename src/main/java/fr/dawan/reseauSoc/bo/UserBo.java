@@ -11,7 +11,7 @@ public class UserBo extends Dao{
 	public static User findByEmail(String email) {
 		String hql = "SELECT u FROM User u WHERE u.email = :email";
 		Query query = session().createQuery(hql)
-				.setParameter("email", email);
+			.setParameter("email", email);
 		if(query.list().size() > 0) {
 			user = (User) query.list().get(0);	
 		}

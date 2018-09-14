@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8" %>
 <c:set var="titlePage" value="Ajout d'un Film" scope="session"/>
 <form method="post" action="">
 	<fieldset class="form-group">
@@ -10,7 +11,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="releaseDate">Année: </label>
+			<label for="releaseDate">AnnÃ©e: </label>
 			<small class="text-danger">${ error.msgReleaseDate }</small>
 			<input class="form-control" id="releaseDate" type="text" name="releaseDate" value="${ movie.releaseDate }">
 		</div>

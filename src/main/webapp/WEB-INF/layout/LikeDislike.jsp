@@ -15,11 +15,11 @@
 
 	<div class="vote_btns">
 
-		<form action='<c:url value="/like?like=1+${ param.url }" />' method="post">
+		<form action='<c:url value="/like?like=1${ param.url }" />' method="post">
 			<button type="submit" class="vote_btn vote_like"><i class="fa fa-thumbs-up">${ param.likeCount }</i></button>
 		</form>		
 
-		<form action="<c:url value="/like?like=-1+${ param.url }" />" method="post">
+		<form action="<c:url value="/like?like=-1${ param.url }" />" method="post">
 			<button type="submit" class="vote_btn vote_dislike"><i class="fa fa-thumbs-down">${ param.dislikeCount }</i></button>
 		</form>
 

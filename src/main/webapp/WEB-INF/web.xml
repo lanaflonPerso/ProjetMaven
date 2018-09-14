@@ -14,6 +14,7 @@
   	<filter-name>ConnectionUser</filter-name>
   	<url-pattern>/movie/add</url-pattern>
   	<url-pattern>/people/add</url-pattern>
+  	<url-pattern>/like</url-pattern>
   </filter-mapping>
   
   <servlet>

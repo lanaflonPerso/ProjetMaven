@@ -9,14 +9,15 @@
 	  <div class="col-md-8">
 	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>
 	    
-
-		<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
-		  <jsp:param name="likeCount" value="${ movie.likeCount }" />
-		  <jsp:param name="dislikeCount" value="${ movie.dislikeCount }" />
-		  <jsp:param name="progressBar" value="${ 100*(movie.likeCount/(movie.likeCount+movie.dislikeCount)) }" />
-		  <jsp:param name="myVote" value="is-disliked" />
-		  <jsp:param name="url" value="&table=Movie&id=${ movie.id }" />
-		</jsp:include>
+		<c:if test="${ sessionScope.user != null  }">
+			<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
+			  <jsp:param name="likeCount" value="${ movie.likeCount }" />
+			  <jsp:param name="dislikeCount" value="${ movie.dislikeCount }" />
+			  <jsp:param name="progressBar" value="${ 100*(movie.likeCount/(movie.likeCount+movie.dislikeCount)) }" />
+			  <jsp:param name="myVote" value="is-disliked" />
+			  <jsp:param name="url" value="&id=${ movie.id }" />
+			</jsp:include>
+		</c:if>
 	   
 	    <p>${ movie.synopsis }</p>
 	    

@@ -1,4 +1,4 @@
-package fr.dawan.reseauSoc.ctrl;
+package fr.dawan.reseauSoc.movie;
 
 import java.time.LocalDate;
 
@@ -33,13 +33,14 @@ public class MovieCtrl {
 	}
 	
 	public void setTitle() {
-		if(movie.getTitle().length() < 5) {
-			msgTitle= "Le titre doit avoir plus de 5 caractéres";
+		if(movie.getTitle().length() < 4) {
+			msgTitle= "Le titre doit avoir plus de 4 caractéres";
 			error= true;
 		}
 	}
 	public void setReleaseDate() {
 		LocalDate now= LocalDate.now();
+		System.out.println(movie.getReleaseDate()+" > "+now.getYear()+" || "+movie.getReleaseDate()+" < 1900");
 		if(movie.getReleaseDate() > now.getYear() || movie.getReleaseDate() < 1900) {
 			msgReleaseDate= "Erreur sur la l'année de sortie";
 			error= true;

@@ -1,4 +1,4 @@
-package fr.dawan.reseauSoc.servlet.movie;
+package fr.dawan.reseauSoc.movie;
 
 import java.io.IOException;
 
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.bo.MovieBo;
-import fr.dawan.reseauSoc.ctrl.MovieCtrl;
 
 @WebServlet("/movie/add")
 public class AddMovieServlet extends HttpServlet {
@@ -29,6 +28,9 @@ public class AddMovieServlet extends HttpServlet {
 		int releaseDate= 0;
 		Movie movie= new Movie();
 		movie.setTitle(request.getParameter("title"));
+		try {
+			releaseDate= Integer.valueOf(request.getParameter("releaseDate")); 
+		} catch (Exception e) {	}
 		movie.setReleaseDate(releaseDate);
 		movie.setSynopsis(request.getParameter("synopsis"));
 		movie.setPicture(request.getParameter("picture"));
