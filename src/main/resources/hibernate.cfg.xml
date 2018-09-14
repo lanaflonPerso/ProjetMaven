@@ -17,6 +17,6 @@
 		<mapping class="fr.dawan.reseauSoc.beans.Function" />
 		<mapping class="fr.dawan.reseauSoc.beans.Movie" />
 		<mapping class="fr.dawan.reseauSoc.beans.Episode" />
-		   <mapping class="fr.dawan.reseauSoc.beans.User" />
+		<mapping class="fr.dawan.reseauSoc.beans.User" />
     </session-factory>
 </hibernate-configuration>

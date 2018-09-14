@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>Archetype Created Web Application</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>ReseauSocial</display-name>
+  <filter>
+  	<description>
+  	</description>
+  	<display-name>ConnectionUser</display-name>
+  	<filter-name>ConnectionUser</filter-name>
+  	<filter-class>fr.dawan.reseauSoc.filter.ConnectionUser</filter-class>
+  </filter>
+
+<!-- *************************MAPPING FILTER******************************* -->
+  <filter-mapping>
+  	<filter-name>ConnectionUser</filter-name>
+  	<url-pattern>/movie/add</url-pattern>
+  	<url-pattern>/people/add</url-pattern>
+  </filter-mapping>
+  
   <servlet>
-  	<servlet-name>Autre</servlet-name>
-  	<!-- <display-name>Autre</display-name> -->
-  	<!-- <description></description> -->
-  	<servlet-class>reseauSocial.Autre</servlet-class>
+  	<description>
+  	</description>
+  	<display-name>test</display-name>
+  	<servlet-name>test</servlet-name>
+  	<servlet-class>fr.dawan.reseauSoc.servlet.test</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>Autre</servlet-name>
-  	<url-pattern>/Autre</url-pattern>
+  	<servlet-name>test</servlet-name>
+  	<url-pattern>/test</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>Index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
+    </jsp-property-group>
+  </jsp-config>
 </web-app>

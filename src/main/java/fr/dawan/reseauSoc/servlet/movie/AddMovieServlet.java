@@ -21,7 +21,7 @@ public class AddMovieServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("page", "/WEB-INF/form/movie/AddMovie.jsp");
+		request.setAttribute("page", "/WEB-INF/movie/AddMovie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
 
