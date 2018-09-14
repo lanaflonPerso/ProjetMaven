@@ -14,6 +14,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">user= ${ sessionScope.user.lastName }</a>
 			</li>
+			
+<%--                Menu Utilisateur              --%>			
+			
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Recherche
@@ -36,7 +39,27 @@
 					</c:choose>
 				</c:if>
 			</li>
-			
+<%--                Menu Ajout              --%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">	Ajout</a>
+				
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item" href="<c:url value= "/movie/add" />">Film</a>
+					<a class="dropdown-item" href="<c:url value= "/film/recherche" />">Un Film</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<c:if test="${ not empty sessionScope.user.id }">
+					<c:choose>
+						<c:when test="${ category == 'films'}">
+							<a href="<c:url value= "/film/ajout" />"><i class="fas fa-plus-circle"></i></a>
+						</c:when>
+						<c:when test="${ category == 'jeux'}">
+							<a href="<c:url value= "/jeux/ajout" />"><i class="fas fa-plus-circle"></i></a>
+						</c:when>
+					</c:choose>
+				</c:if>
+			</li>
 			<li class="nav-item">
 				<c:choose>
 					<c:when test="${ not empty sessionScope.user.id }">
