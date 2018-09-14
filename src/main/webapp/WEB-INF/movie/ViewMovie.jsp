@@ -7,7 +7,7 @@
 	  </div>
 	
 	  <div class="col-md-8">
-	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>
+	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>like = ${ movie.likeCount } dislike = ${ movie.dislikeCount }
 	    
 		<c:if test="${ sessionScope.user != null  }">
 			<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
@@ -15,7 +15,7 @@
 			  <jsp:param name="dislikeCount" value="${ movie.dislikeCount }" />
 			  <jsp:param name="progressBar" value="${ 100*(movie.likeCount/(movie.likeCount+movie.dislikeCount)) }" />
 			  <jsp:param name="myVote" value="is-disliked" />
-			  <jsp:param name="url" value="&id=${ movie.id }" />
+			  <jsp:param name="url" value="&id=${ movie.id }&type=movie" />
 			</jsp:include>
 		</c:if>
 	   

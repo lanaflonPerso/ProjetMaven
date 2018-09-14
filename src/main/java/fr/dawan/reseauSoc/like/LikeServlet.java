@@ -1,6 +1,7 @@
 package fr.dawan.reseauSoc.like;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.Like;
 import fr.dawan.reseauSoc.beans.User;
-import fr.dawan.reseauSoc.dao.Dao;
 
 @WebServlet("/like")
 public class LikeServlet extends HttpServlet {
@@ -21,9 +21,10 @@ public class LikeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id= 0;
 		if(request.getParameter("like").equals("1") || request.getParameter("like").equals("-1")) {
+			User user= (User) request.getSession().getAttribute("user");
 			Likable likable= new Likable();
-			int id= 0;
 			try {
 				id= Integer.valueOf(request.getParameter("id"));
 				likable.setId(id);
@@ -33,17 +34,20 @@ public class LikeServlet extends HttpServlet {
 			}
 			
 			int vote= Integer.valueOf(request.getParameter("like"));
-			System.out.println("(User) "+request.getSession().getAttribute("user")+", "+likable+", "+vote);
-			Like like= new Like((User) request.getSession().getAttribute("user"), likable, vote);
+			Like like= new Like(user, likable, vote);
 			
-			if(vote == 1) {
-				System.out.println("on aime");
-				LikeBo.like(id);
-			} else if(vote== -1) {
-				System.out.println("on n'aime pas!");
-				LikeBo.dislike(id);
-			}
-			Dao.save(like);
+			LikeBo.save(like);
+		}else {
+			response.sendError(403, "le numéro n'est pas cohérent");
+			return;
+		}
+		
+		switch (request.getParameter("type")) {
+		case "movie":
+			response.sendRedirect(request.getContextPath()+"/movie?id="+id);
+			return;
+		default:
+			break;
 		}
 	}
 

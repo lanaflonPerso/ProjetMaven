@@ -15,6 +15,7 @@ public class UserBo extends Dao{
 		if(query.list().size() > 0) {
 			user = (User) query.list().get(0);	
 		}
+		System.out.println("password= "+user.getPassword());
 		return user;
 	}
 }

@@ -41,7 +41,6 @@ public class ConnectionServlet extends HttpServlet {
 		User user= UserBo.findByEmail(email);
 		if(user != null) {
 			if (password.equals(user.getPassword())) {
-				user.setPassword("");
 				request.getSession().setAttribute("user", user);
 				response.sendRedirect(request.getContextPath()+"/");
 				return;
