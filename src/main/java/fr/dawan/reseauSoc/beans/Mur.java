@@ -1,7 +1,8 @@
 package fr.dawan.reseauSoc.beans;
 
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,27 +18,44 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name= "User")
+@Table(name= "Mur")
 public class Mur {
 	
 	@Id
 	@GeneratedValue
 	@Column(name="mur_id")
 	private Integer id;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
 	private User user;
+	
 	@ManyToOne
 	@JoinColumn(name="likable_id", nullable=false)
 	private Likable likable;
+	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 		name= "Mur_Follower",
 		joinColumns = { @JoinColumn(name = "mur_id") },
 		inverseJoinColumns = { @JoinColumn(name = "follower_id") }
 	)
+	private Set<User> followers;
 	private boolean share;
+	
 	@Column(name="mur_dateTime", columnDefinition="DATETIME")
 	@Temporal(TemporalType.DATE)
 	private Calendar dateTime;
+	
+	private String html;
+	
+	
+	/* ****************************************************************************************
+	 * ****************************CONSTRUCTEUR************************************************
+	 * ***************************************************************************************/
+	public Mur() {
+		followers= new HashSet<>();
+	}
 	
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS PERSONEL**********************************
@@ -49,7 +67,6 @@ public class Mur {
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS*******************************************
 	 * ***************************************************************************************/
-	private List<User> followers;
 	public Integer getId() {
 		return id;
 	}
@@ -68,10 +85,10 @@ public class Mur {
 	public void setLikable(Likable likable) {
 		this.likable = likable;
 	}
-	public List<User> getFollowers() {
+	public Set<User> getFollowers() {
 		return followers;
 	}
-	public void setFollowers(List<User> followers) {
+	public void setFollowers(Set<User> followers) {
 		this.followers = followers;
 	}
 	public boolean isShare() {
@@ -85,5 +102,11 @@ public class Mur {
 	}
 	public void setDateTime(Calendar dateTime) {
 		this.dateTime = dateTime;
+	}
+	public String getHtml() {
+		return html;
+	}
+	public void setHtml(String html) {
+		this.html = html;
 	}
 }

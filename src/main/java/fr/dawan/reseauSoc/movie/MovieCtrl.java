@@ -3,7 +3,6 @@ package fr.dawan.reseauSoc.movie;
 import java.time.LocalDate;
 
 import fr.dawan.reseauSoc.beans.Movie;
-import fr.dawan.reseauSoc.bo.MovieBo;
 
 public class MovieCtrl {
 

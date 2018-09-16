@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
-import fr.dawan.reseauSoc.bo.MovieBo;
 
 @WebServlet("/movie/add")
 public class AddMovieServlet extends HttpServlet {

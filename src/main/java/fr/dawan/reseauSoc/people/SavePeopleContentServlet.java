@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Function;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.PeopleContent;
-import fr.dawan.reseauSoc.bo.MovieBo;
+import fr.dawan.reseauSoc.movie.MovieBo;
 
 @WebServlet("/people/add")
 public class SavePeopleContentServlet extends HttpServlet {

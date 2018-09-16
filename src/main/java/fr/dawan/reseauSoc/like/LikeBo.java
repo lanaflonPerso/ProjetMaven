@@ -51,6 +51,19 @@ public class LikeBo extends Dao {
 		return query;
 	}
 	
+	public static Like findByType(String type, int likable) {
+		Like like= null;
+		String hql = "FROM Like L WHERE L.likable.id = :id AND L.type= :type";
+		Query  query = session().createQuery(hql);
+		query.setParameter("id", likable);
+		query.setParameter("type", type);
+		
+		if(query.list().size() > 0) {
+			like= (Like) query.list().get(0);
+		}
+		return like;
+	}
+	
 	
 	public static void save(Like like) {
 		Like isLike= myLike(like.getLikable().getId(), like.getUser().getId());

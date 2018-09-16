@@ -12,11 +12,13 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
+        <mapping class="fr.dawan.reseauSoc.beans.Category" />
 		<mapping class="fr.dawan.reseauSoc.beans.Episode" />
 		<mapping class="fr.dawan.reseauSoc.beans.Function" />
 		<mapping class="fr.dawan.reseauSoc.beans.Likable" />
 		<mapping class="fr.dawan.reseauSoc.beans.Like" />
 		<mapping class="fr.dawan.reseauSoc.beans.Movie" />
+		<mapping class="fr.dawan.reseauSoc.beans.Mur" />
         <mapping class="fr.dawan.reseauSoc.beans.PeopleContent" />
         <mapping class="fr.dawan.reseauSoc.beans.Serie" />
 		<mapping class="fr.dawan.reseauSoc.beans.User" />

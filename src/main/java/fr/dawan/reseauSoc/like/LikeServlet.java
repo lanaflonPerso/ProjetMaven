@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.Like;
 import fr.dawan.reseauSoc.beans.User;
+import fr.dawan.reseauSoc.movie.MovieBo;
+import fr.dawan.reseauSoc.mur.MurBo;
 
 @WebServlet("/like")
 public class LikeServlet extends HttpServlet {
@@ -36,19 +38,22 @@ public class LikeServlet extends HttpServlet {
 			int vote= Integer.valueOf(request.getParameter("like"));
 			Like like= new Like(user, likable, vote);
 			
-			LikeBo.save(like);
+			switch (request.getParameter("type")) {
+			case "movie":
+				like.setType("movie");
+				LikeBo.save(like);
+				MurBo mBo= new MurBo();
+				mBo.setMovie(MovieBo.findById(likable.getId()), user);
+				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
+				return;
+			default:
+				break;
+			}
 		}else {
 			response.sendError(403, "le numéro n'est pas cohérent");
 			return;
 		}
 		
-		switch (request.getParameter("type")) {
-		case "movie":
-			response.sendRedirect(request.getContextPath()+"/movie?id="+id);
-			return;
-		default:
-			break;
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

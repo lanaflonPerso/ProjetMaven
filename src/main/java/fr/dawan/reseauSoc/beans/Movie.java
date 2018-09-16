@@ -31,12 +31,13 @@ public class Movie extends Likable {
 		inverseJoinColumns = { @JoinColumn(name = "peopleContent_id") }
 	)
 	private List<PeopleContent> actors;
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
-			name= "Video_Category",
-			joinColumns = { @JoinColumn(name = "Video_id") },
-			inverseJoinColumns = { @JoinColumn(name = "Category_id") }
-		)
-	private List<Category> category;
+		name= "Video_Category",
+		joinColumns = { @JoinColumn(name = "video_id") },
+		inverseJoinColumns = { @JoinColumn(name = "Category_id") }
+	)
+	private List<Category> categorys;
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
@@ -91,11 +92,11 @@ public class Movie extends Likable {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public List<Category> getCategory() {
-		return category;
+	public List<Category> getCategorys() {
+		return categorys;
 	}
-	public void setCategory(List<Category> category) {
-		this.category = category;
+	public void setCategory(List<Category> categorys) {
+		this.categorys = categorys;
 	}
 
 	/* ****************************************************************************************

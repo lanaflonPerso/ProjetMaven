@@ -33,6 +33,7 @@ public class Like {
 	@Column(name = "createdAt", columnDefinition="DATETIME")
 	@Temporal(TemporalType.DATE)
 	private Calendar createdAt;
+	private String type;
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
@@ -79,5 +80,14 @@ public class Like {
 	}
 	public void setLikable(Likable likable) {
 		this.likable = likable;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
