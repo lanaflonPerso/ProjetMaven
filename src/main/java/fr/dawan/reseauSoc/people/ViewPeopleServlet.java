@@ -1,4 +1,4 @@
-package fr.dawan.reseauSoc.movie;
+package fr.dawan.reseauSoc.people;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.dawan.reseauSoc.beans.Movie;
+import fr.dawan.reseauSoc.beans.PeopleContent;
 
-@WebServlet("/movie")
-public class ViewMovieServlet extends HttpServlet {
+@WebServlet("/people")
+public class ViewPeopleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ViewMovieServlet() {
+    public ViewPeopleServlet() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id= 0;
 		request.setAttribute("error", true);
-		request.setAttribute("titlePage", "film inconnue");
+		request.setAttribute("titlePage", "Personalité inconnue");
 		
 		if(request.getParameter("id") != null) {
 			try {
@@ -30,15 +30,15 @@ public class ViewMovieServlet extends HttpServlet {
 				
 			}
 			
-			Movie movie= MovieBo.findById(id);
-			if(movie != null) {
+			PeopleContent people= PeopleContentBo.findById(id);
+			if(people != null) {
 				request.setAttribute("error", false);
-				request.setAttribute("movie", movie);
-				request.setAttribute("titlePage", movie.getTitle());	
+				request.setAttribute("people", people);
+				request.setAttribute("titlePage", people.getFirstName()+" "+people.getLastName());	
 			}
 		}
 		
-		request.setAttribute("page", "/WEB-INF/movie/ViewMovie.jsp");
+		request.setAttribute("page", "/WEB-INF/people/ViewPeople.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
 }

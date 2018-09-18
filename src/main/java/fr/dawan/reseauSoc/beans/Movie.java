@@ -22,7 +22,7 @@ public class Movie extends Likable {
 	private int releaseDate;
 	private String studio;
 	private String picture;
-	@Column(length = 800)
+	@Column(length = 1500)
 	private String synopsis;
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
@@ -30,20 +30,20 @@ public class Movie extends Likable {
 		joinColumns = { @JoinColumn(name = "movie_id") },
 		inverseJoinColumns = { @JoinColumn(name = "peopleContent_id") }
 	)
-	private List<PeopleContent> actors;
+	private List<PeopleContent> actors= new ArrayList<>();
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 		name= "Video_Category",
 		joinColumns = { @JoinColumn(name = "video_id") },
 		inverseJoinColumns = { @JoinColumn(name = "Category_id") }
 	)
-	private List<Category> categorys;
+	private List<Category> categorys= new ArrayList<>();
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
 	 * ***************************************************************************************/
 	public Movie() {
-		actors= new ArrayList<>();
+		
 	}
 	
 	/* ****************************************************************************************
@@ -51,6 +51,10 @@ public class Movie extends Likable {
 	 * ***************************************************************************************/
 	public void setActor(PeopleContent actor) {
 		actors.add(actor);
+	}
+	
+	public void setCategory(Category category) {
+		this.categorys.add(category);
 	}
 	
 	/* ****************************************************************************************
@@ -84,7 +88,11 @@ public class Movie extends Likable {
 		return synopsis;
 	}
 	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
+		if(synopsis.length() < 1500) {
+			this.synopsis = synopsis;
+		} else {
+			this.synopsis = synopsis.substring(0, 1499);
+		}
 	}
 	public String getPicture() {
 		return picture;
@@ -95,7 +103,7 @@ public class Movie extends Likable {
 	public List<Category> getCategorys() {
 		return categorys;
 	}
-	public void setCategory(List<Category> categorys) {
+	public void setCategorys(List<Category> categorys) {
 		this.categorys = categorys;
 	}
 

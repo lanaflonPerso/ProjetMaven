@@ -1,6 +1,5 @@
 package fr.dawan.reseauSoc.beans;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

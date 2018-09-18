@@ -1,14 +1,6 @@
 package fr.dawan.reseauSoc.movie;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.dao.Dao;
@@ -21,7 +13,6 @@ public class MovieBo extends Dao {
 	 * @param session
 	 * @return un film
 	 */
-	@SuppressWarnings("unchecked")
 	public static Movie findById(int id) {
 		EntityManager em= Dao.createEntityManager("JPA");
 		Dao dao= new Dao();
