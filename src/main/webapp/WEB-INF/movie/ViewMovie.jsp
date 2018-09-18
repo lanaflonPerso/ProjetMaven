@@ -7,7 +7,7 @@
 	  </div>
 	
 	  <div class="col-md-8">
-	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>like = ${ movie.likeCount } dislike = ${ movie.dislikeCount }
+	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>
 	    
 		<c:if test="${ sessionScope.user != null  }">
 			<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
