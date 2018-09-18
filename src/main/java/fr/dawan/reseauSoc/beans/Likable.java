@@ -10,14 +10,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity  
-@Table(name = "likable")  
+@Table(name = "Likable")  
 @Inheritance(strategy=InheritanceType.JOINED) 
 public class Likable {
 
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO)     
 	@Column(name = "id")  
-	private int id;
+	private Integer id;
 	private int likeCount;
 	private int dislikeCount;
 	
@@ -33,11 +33,11 @@ public class Likable {
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS*******************************************
 	 * ***************************************************************************************/
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public int getLikeCount() {

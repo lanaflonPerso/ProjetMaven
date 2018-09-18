@@ -34,7 +34,7 @@ public class Mur {
 	@JoinColumn(name="likable_id", nullable=false)
 	private Likable likable;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(
 		name= "Mur_Follower",
 		joinColumns = { @JoinColumn(name = "mur_id") },
@@ -108,5 +108,14 @@ public class Mur {
 	}
 	public void setHtml(String html) {
 		this.html = html;
+	}
+
+	/* ****************************************************************************************
+	 * ****************************OVERRIDE****************************************************
+	 * ***************************************************************************************/
+	@Override
+	public String toString() {
+		return "Mur [id=" + id + ", user=" + user + ", likable=" + likable + ", followers=" + followers + ", share="
+				+ share + ", dateTime=" + dateTime + ", html=" + html + "]";
 	}
 }
