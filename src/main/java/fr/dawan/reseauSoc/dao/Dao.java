@@ -1,45 +1,63 @@
 package fr.dawan.reseauSoc.dao;
 
-import java.io.UnsupportedEncodingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import fr.dawan.reseauSoc.beans.Likable;
 
 public class Dao {
-
-	protected static SessionFactory sessionFactory;
-	private static Session session;
 	
-	public static <T> void save(T bean) {
-		Transaction tx = session().beginTransaction();
-
-		session.save(bean);
+	public static EntityManager createEntityManager(String persistenceUnitName) {
+		EntityManagerFactory eef= Persistence.createEntityManagerFactory(persistenceUnitName);
+		EntityManager em= eef.createEntityManager();
 		
-		tx.commit();
+		return em;
 	}
-		
-	public static Session session() {
-		if (session == null) {
-			try {
-				sessionFactory = new Configuration().configure("/hibernate.cfg.xml")
-						.buildSessionFactory();
-				session = sessionFactory.openSession();
-			} catch (Exception e) {
-				e.printStackTrace();
+
+	public <T extends Likable> void saveOrUpdate(T item, EntityManager em, boolean closeConnection) {
+		EntityTransaction tx= em.getTransaction();
+		try {
+			tx.begin();
+			if (item.getId() == null ) {
+				em.persist(item);
+			} else {
+				em.merge(item);
 			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
 		}
-		return session;
+		if (closeConnection) {
+			em.close();
+		}
+	}
+
+	public <T extends Likable> void delete(T item, EntityManager em, boolean closeConnection) {
+		EntityTransaction tx= em.getTransaction();
+		tx.begin();
+		if(item.getId() != null) {
+			em.remove(item);
+		}
+		tx.commit();
+		if(closeConnection) {
+			em.close();
+		}
 	}
 	
-	public static void closeSession() {
-		session.close();
-	}
-	
-	public static String MySQLPassword(String password) throws UnsupportedEncodingException {
-        byte[] utf8 = password.getBytes("UTF-8");
-        return "*" + DigestUtils.sha1Hex(DigestUtils.sha1(utf8)).toUpperCase();
+	public <T extends Likable> T findById(Class<T> clazz, int id, EntityManager em, boolean closeConnection) {
+		T result= null;
+		try {
+			result=em.find(clazz, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(closeConnection) {
+			em.close();
+		}
+		return result;
 	}
 }

@@ -26,7 +26,7 @@ public class PeopleContent extends Likable {
 	private String picture;
 	
 	@Column
-	private LocalDate birthDay;
+	private Integer birthDay;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
@@ -34,13 +34,13 @@ public class PeopleContent extends Likable {
 		joinColumns = { @JoinColumn(name = "peopleContent_id") },
 		inverseJoinColumns = { @JoinColumn(name = "function_id") }
 	)
-	private List<Function> functions;
+	private List<Function> functions= new ArrayList<>();
 	
 	/* ****************************************************************************************
 	 * ***************************CONSTRUCTEUR************************************************
 	 * ***************************************************************************************/
 	public PeopleContent() {
-		functions= new ArrayList<>();
+
 	}
 	
 	
@@ -72,11 +72,11 @@ public class PeopleContent extends Likable {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public LocalDate getBirthDay() {
+	public int getBirthDay() {
 		return birthDay;
 	}
-	public void setBirthDay(LocalDate birthDay) {
-		this.birthDay = birthDay;
+	public void setBirthDay(int i) {
+		this.birthDay = i;
 	}
 	public List<Function> getFunctions() {
 		return functions;
@@ -88,7 +88,11 @@ public class PeopleContent extends Likable {
 		return biography;
 	}
 	public void setBiography(String biography) {
-		this.biography = biography;
+		if(biography.length() < 800) {
+			this.biography = biography;
+		} else {
+			this.biography = biography.substring(0, 799);
+		}
 	}
 	public String getPicture() {
 		return picture;

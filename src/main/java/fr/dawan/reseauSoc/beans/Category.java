@@ -17,6 +17,11 @@ public class Category extends Likable {
 	public Category() {
 	
 	}
+	
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
 
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS*******************************************

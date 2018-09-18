@@ -17,17 +17,7 @@
   	<url-pattern>/like</url-pattern>
   </filter-mapping>
   
-  <servlet>
-  	<description>
-  	</description>
-  	<display-name>test</display-name>
-  	<servlet-name>test</servlet-name>
-  	<servlet-class>fr.dawan.reseauSoc.servlet.test</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>test</servlet-name>
-  	<url-pattern>/test</url-pattern>
-  </servlet-mapping>
+ <!-- *************************WELCOME FILE******************************* -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
