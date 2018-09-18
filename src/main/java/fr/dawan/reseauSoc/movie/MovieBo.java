@@ -1,6 +1,7 @@
 package fr.dawan.reseauSoc.movie;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.dao.Dao;
@@ -19,23 +20,20 @@ public class MovieBo extends Dao {
 		return dao.findById(Movie.class, id, em, false);
 	}
 	
-//	public static Movie findByTitleReleaseDate(String title, int releaseDate) {
-//		Session session= session();
-//		Movie movie= null;
-//		
-//		Criteria criteria = session.createCriteria(Movie.class);
-//		Criterion critere = Restrictions.eq("title", title);
-//		Criterion critere2 = Restrictions.eq("releaseDate", releaseDate);
-//		
-//		criteria.add(critere);
-//		criteria.add(critere2);
-//		
-//		if(criteria.list().size() > 0) {
-//			movie= (Movie) criteria.list().get(0);	
-//		}
-//		
-//		return movie;	
-//	}
+	public static Movie findByTitleReleaseDate(String title, int releaseDate) {
+	
+		Movie movie= null;
+		
+		EntityManager em= Dao.createEntityManager("JPA");
+		
+		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title = :title AND movie.releaseDate= :date") ;
+		query.setParameter("title",  title);
+		query.setParameter("date",  releaseDate);
+		if(query.getResultList().size() > 0) {
+			movie = (Movie) query.getResultList().get(0);
+		}		
+		return movie;	
+	}
 //	
 //	@SuppressWarnings("unchecked")
 //	public static List<Movie> findByTitle(Session session, String title) {

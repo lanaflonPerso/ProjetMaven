@@ -35,11 +35,8 @@ public class ConnectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email= request.getParameter("email");
 		String password= User.MySQLPassword(request.getParameter("password"));
-		System.out.println("req= "+request.getParameter("password"));
 		User user= UserBo.findByEmail(email);
-		System.out.println("pass SL"+password);
 		if(user != null) {
-			System.out.println("pass SL"+password);
 			if (password.equals(user.getPassword())) {
 				request.getSession().setAttribute("user", user);
 				response.sendRedirect(request.getContextPath()+"/");

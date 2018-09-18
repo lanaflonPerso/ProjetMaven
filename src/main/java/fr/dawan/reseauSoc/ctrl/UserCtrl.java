@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.dawan.reseauSoc.beans.User;
-import fr.dawan.reseauSoc.bo.UserBo;
+import fr.dawan.reseauSoc.user.UserBo;
 
 public class UserCtrl {
 
@@ -30,6 +30,7 @@ public class UserCtrl {
 	}
 
 	public void userExist() {
+		System.out.println("email ="+user.getEmail());
 		User userExist= UserBo.findByEmail(user.getEmail());
 		if (userExist != null) {
 			msgUser= "l'adresse email est déja utilisée";

@@ -13,14 +13,11 @@ public class UserBo {
 		EntityManager em= Dao.createEntityManager("JPA");
 		
 		Query query = em.createQuery("SELECT user FROM User user WHERE user.email = :email") ;
-		query.setParameter("email",  email) ;
+		query.setParameter("email",  email);
 		
 		if(query.getResultList().size() > 0) {
 			user = (User) query.getResultList().get(0);
-		}
-		
-		System.out.println("pass DB"+user.getPassword());
-		
+		}		
 		return user;
 	}
 }
