@@ -17,7 +17,8 @@ public class UserBo {
 		
 		if(query.getResultList().size() > 0) {
 			user = (User) query.getResultList().get(0);
-		}		
+		}
+		em.close();
 		return user;
 	}
 }

@@ -16,7 +16,7 @@
   	<url-pattern>/people/add</url-pattern>
   	<url-pattern>/like</url-pattern>
   </filter-mapping>
-  
+
  <!-- *************************WELCOME FILE******************************* -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -1,5 +1,7 @@
 package fr.dawan.reseauSoc.movie;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,7 +19,7 @@ public class MovieBo extends Dao {
 	public static Movie findById(int id) {
 		EntityManager em= Dao.createEntityManager("JPA");
 		Dao dao= new Dao();
-		return dao.findById(Movie.class, id, em, false);
+		return dao.findById(Movie.class, id, em, true);
 	}
 	
 	public static Movie findByTitleReleaseDate(String title, int releaseDate) {
@@ -31,8 +33,23 @@ public class MovieBo extends Dao {
 		query.setParameter("date",  releaseDate);
 		if(query.getResultList().size() > 0) {
 			movie = (Movie) query.getResultList().get(0);
-		}		
+		}
+		em.close();
 		return movie;	
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Movie> findByTitle(String title) {	
+		EntityManager em= Dao.createEntityManager("JPA");
+		System.out.println("title= "+title);
+		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title LIKE :title") ;
+		query.setParameter("title",  "%"+title+"%");
+		
+		List<Movie> movies = query.getResultList();
+		System.out.println("size= "+movies.size());
+		
+		em.close();
+		return movies;	
 	}
 //	
 //	@SuppressWarnings("unchecked")

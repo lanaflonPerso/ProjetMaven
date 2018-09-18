@@ -18,7 +18,7 @@
 			  <jsp:param name="url" value="&id=${ movie.id }&type=movie" />
 			</jsp:include>
 		</c:if>
-	   
+		
 	    <p>${ movie.synopsis }</p>
 	    
 	    <ul class="list-group">

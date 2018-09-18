@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,14 +25,14 @@ public class Movie extends Likable {
 	private String picture;
 	@Column(length = 1500)
 	private String synopsis;
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch=FetchType.EAGER)
 	@JoinTable(
 		name= "Movie_PeopleContent",
 		joinColumns = { @JoinColumn(name = "movie_id") },
 		inverseJoinColumns = { @JoinColumn(name = "peopleContent_id") }
 	)
 	private List<PeopleContent> actors= new ArrayList<>();
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(
 		name= "Video_Category",
 		joinColumns = { @JoinColumn(name = "video_id") },
