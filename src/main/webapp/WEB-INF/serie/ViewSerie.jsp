@@ -37,7 +37,7 @@
 			<div class="col-md-8">
 				<c:forEach items="${ serie.episodes }" var="episode">
 					<li class="list-group-item">
-						<a href='<c:url value="/people?id=${ episode.id }" />' >Saison ${ episode.season } Episode ${episode.number } - ${ episode.title }</a>
+						<a href='<c:url value="/episode?id=${ episode.id }" />' >Saison ${ episode.season } Episode ${episode.number } - ${ episode.title }</a>
 					</li>
 				</c:forEach>
 			</div>
