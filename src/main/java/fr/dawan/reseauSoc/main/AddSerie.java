@@ -14,6 +14,9 @@ public class AddSerie {
 		EntityManager em= Dao.createEntityManager("JPA");
 		Dao dao= new Dao();
 		dao.saveOrUpdate(getCodeQuantum(), em, false);
+		for (Episode ep: getCodeQuantum().getEpisodes()) {
+			System.out.println("Titre= "+ep.getTitle());
+		}
 		em.close();
 	}
 	
@@ -46,13 +49,19 @@ public class AddSerie {
 	public static Serie getCodeQuantum() {
 		Serie serie= new Serie();
 		serie.setTitle("Code Quantum");
+		serie.setType("serie");
 		serie.setReleaseDate(1989);
 		
 		Episode epOne_One=  new Episode("Pilote - Partie 1", 1, 1);
+		epOne_One.setType("episode");
 		Episode epOne_Two=  new Episode("Pilote - Partie 2", 1, 2);
+		epOne_Two.setType("episode");
 		Episode epOne_Three= new Episode("Amours croisées", 1, 3);
+		epOne_Three.setType("episode");
 		Episode epOne_Four= new Episode("La main droite du Seigneur", 1, 4);
+		epOne_Four.setType("episode");
 		Episode epOne_Five= new Episode("Le défi est lancé", 1, 5);
+		epOne_Five.setType("episode");
 		serie.setEpisode(epOne_One);
 		serie.setEpisode(epOne_Two);
 		serie.setEpisode(epOne_Three);
@@ -60,8 +69,11 @@ public class AddSerie {
 		serie.setEpisode(epOne_Five);
 		
 		Episode epTwo_One=  new Episode("La Maure aux trousses", 2, 1);
+		epTwo_One.setType("episode");
 		Episode epTwo_Two=  new Episode("L'enfer du disco", 2, 1);
+		epTwo_One.setType("episode");
 		Episode epTwo_Three=  new Episode("Retour vers un futur", 2, 1);
+		epTwo_One.setType("episode");
 		serie.setEpisode(epTwo_One);
 		serie.setEpisode(epTwo_Two);
 		serie.setEpisode(epTwo_Three);

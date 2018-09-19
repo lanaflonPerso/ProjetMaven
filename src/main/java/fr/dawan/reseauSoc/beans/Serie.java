@@ -3,6 +3,7 @@ package fr.dawan.reseauSoc.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +17,10 @@ public class Serie extends Video {
 	private String studio;
 	
 //	private List<PeopleContent> showRunners;
-	@OneToMany(mappedBy="serie")
+	@OneToMany(
+	        cascade = CascadeType.ALL, 
+	        orphanRemoval = true
+	    )
 	private List<Episode> Episodes= new ArrayList<>();
 	
 	/* ****************************************************************************************
@@ -59,5 +63,8 @@ public class Serie extends Video {
 	}
 	public void setEpisodes(List<Episode> episodes) {
 		Episodes = episodes;
+	}
+	public void setReleaseDate(Integer releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 }

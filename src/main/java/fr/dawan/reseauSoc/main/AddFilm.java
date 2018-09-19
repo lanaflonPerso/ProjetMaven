@@ -11,13 +11,36 @@ import fr.dawan.reseauSoc.dao.Dao;
 public class AddFilm {
 	
 	public static Function acteur= new Function("actor");
-	
-	static Category adventure= new Category("Adventure");
-	static Category comedie= new Category("Comédie");
-	static Category drame= new Category("Drame");
-	static Category horreur= new Category("Horreur");
-	static Category sf= new Category("Science-Fiction");
-	static Category thriller= new Category("Thriller");
+	public static Category getAdventure() {
+		Category adventure= new Category("Adventure");
+		adventure.setType("category");
+		return adventure;
+	}
+	public static Category getComedie() {
+		Category comedie= new Category("Comédie");
+		comedie.setType("category");
+		return comedie;
+	}
+	public static Category getDrame() {
+		Category drame= new Category("Drame");
+		drame.setType("category");
+		return drame;
+	}
+	public static Category getHorreur() {
+		Category horreur= new Category("Horreur");
+		horreur.setType("category");
+		return horreur;
+	}
+	public static Category getSf() {
+		Category sf= new Category("Science-Fiction");
+		sf.setType("category");
+		return sf;
+	}
+	public static Category getThriller() {
+		Category thriller= new Category("Thriller");
+		thriller.setType("category");
+		return thriller;
+	}
 	
 	public static void saveMovie() {
 		EntityManager em= Dao.createEntityManager("JPA");
@@ -116,6 +139,7 @@ public class AddFilm {
 	public static Movie getLesDentsDeLaMer() {
 		Movie movie= new Movie();
 		movie.setType("movie");
+		movie.setType("movie");
 		movie.setTitle("Les Dents de la mer");
 		movie.setReleaseDate(1975);
 		movie.setSynopsis("À quelques jours du début de la saison estivale, les habitants de la petite station balnéaire d'Amity sont mis en émoi par la découverte sur le littoral du corps atrocement mutilé d'une jeune vacancière. Pour Martin Brody, le chef de la police, il ne fait aucun doute que la jeune fille a été victime d'un requin. Il décide alors d'interdire l'accès des plages mais se heurte à l'hostilité du maire uniquement intéressé par l'afflux des touristes. Pendant ce temps, le requin continue à semer la terreur le long des côtes et à dévorer les baigneurs...");
@@ -123,14 +147,15 @@ public class AddFilm {
 		movie.setActor(getRichardDreyfuss());
 		movie.setActor(getRobertShaw());
 		movie.setActor(getRoyScheider());
-		movie.setCategory(horreur);
-		movie.setCategory(adventure);
-		movie.setCategory(thriller);
+		movie.setCategory(getHorreur());
+		movie.setCategory(getAdventure());
+		movie.setCategory(getThriller());
 		return movie;
 	}
 	
 	public static Movie getRencontresDuTroisièmeType() {
 		Movie movie= new Movie();
+		movie.setType("movie");
 		movie.setType("movie");
 		movie.setTitle("Rencontres du troisième type");
 		movie.setReleaseDate(1977);
@@ -138,13 +163,14 @@ public class AddFilm {
 		movie.setPicture("https://image.tmdb.org/t/p/w600_and_h900_bestv2/7JEJwW3LMaOsmZT2A3DGxQsuP7F.jpg");
 		movie.setActor(getRichardDreyfuss());
 		movie.setActor(getMelindaDillon());
-		movie.setCategory(drame);
-		movie.setCategory(sf);
+		movie.setCategory(getDrame());
+		movie.setCategory(getSf());
 		return movie;
 	}
 	
 	public static Movie getLArnaque() {
 		Movie movie= new Movie();
+		movie.setType("movie");
 		movie.setType("movie");
 		movie.setTitle("L'arnaque");
 		movie.setReleaseDate(1973);
@@ -152,11 +178,14 @@ public class AddFilm {
 		movie.setPicture("https://image.tmdb.org/t/p/w600_and_h900_bestv2/23pgQqSLuq7PJoOba9QJdCWPfrG.jpg");
 		movie.setActor(getRobertShaw());
 		movie.setActor(getPaulNewman());
+		movie.setCategory(getComedie());
+		movie.setCategory(getDrame());
 		return movie;
 	}
 	
 	public static Movie getExtravagances() {
 		Movie movie= new Movie();
+		movie.setType("movie");
 		movie.setType("movie");
 		movie.setTitle("Extravagances");
 		movie.setReleaseDate(1995);
@@ -164,7 +193,7 @@ public class AddFilm {
 		movie.setPicture("https://image.tmdb.org/t/p/w600_and_h900_bestv2/xIDEoG9FQGmMCh5XsbkvSuD8WrW.jpg");
 		movie.setActor(getPatrickSwayze());
 		movie.setActor(getWesleySnipes());
-		movie.setCategory(comedie);
+		movie.setCategory(getComedie());
 		return movie;
 	}
 }

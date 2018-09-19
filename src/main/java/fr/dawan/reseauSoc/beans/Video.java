@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+@Entity
+@Embeddable
 public class Video extends Likable {
 	
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch=FetchType.EAGER)
 	@JoinTable(
 		name= "Video_PeopleContent",
 		joinColumns = { @JoinColumn(name = "Video_id") },
