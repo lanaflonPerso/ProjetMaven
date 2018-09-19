@@ -25,11 +25,11 @@
 				
 				<c:if test="${ sessionScope.user != null  }">
 					<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
-						<jsp:param name="likeCount" value="${ movie.likeCount }" />
-						<jsp:param name="dislikeCount" value="${ movie.dislikeCount }" />
-						<jsp:param name="progressBar" value="${ 100*(movie.likeCount/(movie.likeCount+movie.dislikeCount)) }" />
+						<jsp:param name="likeCount" value="${ serie.likeCount }" />
+						<jsp:param name="dislikeCount" value="${ serie.dislikeCount }" />
+						<jsp:param name="progressBar" value="${ 100*(serie.likeCount/(serie.likeCount+serie.dislikeCount)) }" />
 						<jsp:param name="myVote" value="is-disliked" />
-						<jsp:param name="url" value="&id=${ movie.id }&type=movie" />
+						<jsp:param name="url" value="&id=${ movie.id }&type=serie" />
 					</jsp:include>
 				</c:if>
 			</div>

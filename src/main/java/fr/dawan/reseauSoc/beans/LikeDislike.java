@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Like_Dislike")
-public class Like {
+public class LikeDislike {
 	
 	@Id
 	@GeneratedValue
@@ -38,11 +38,11 @@ public class Like {
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
 	 * ***************************************************************************************/
-	public Like() {
+	public LikeDislike() {
 		
 	}
 	
-	public Like(User user, Likable likable_id, int typeVote) {
+	public LikeDislike(User user, Likable likable_id, int typeVote) {
 		this.user= user;
 		this.likable= likable_id;
 		this.typeVote= typeVote;
@@ -51,10 +51,10 @@ public class Like {
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS*******************************************
 	 * ***************************************************************************************/
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public int getTypeVote() {
@@ -86,8 +86,5 @@ public class Like {
 	}
 	public void setType(String type) {
 		this.type = type;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 }

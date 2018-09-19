@@ -46,14 +46,4 @@ public class MovieBo extends Dao {
 		
 		return movies;	
 	}
-//	
-//	@SuppressWarnings("unchecked")
-//	public static List<Movie> findByTitle(Session session, String title) {
-//		Criteria criteria = session.createCriteria(Movie.class);
-//		Criterion critere = Restrictions.like("title", title, MatchMode.ANYWHERE);
-//		
-//		criteria.add(critere);
-//		List<Movie> movies = (List<Movie>) criteria.list();
-//		return movies;
-//	}
 }

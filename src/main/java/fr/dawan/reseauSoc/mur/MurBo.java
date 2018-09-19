@@ -1,11 +1,10 @@
 package fr.dawan.reseauSoc.mur;
 
-import java.util.List;
-
-import org.hibernate.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import fr.dawan.reseauSoc.beans.Category;
-import fr.dawan.reseauSoc.beans.Like;
+import fr.dawan.reseauSoc.beans.LikeDislike;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
@@ -17,32 +16,50 @@ public class MurBo extends Dao {
 	private Mur mur= new Mur();
 	private final String URL= "http://localhost:8080/ReseauSocial/";
 	
-
-	public static void findByFollower(User user) {
-		String hql = "FROM Mur M WHERE M.followers.id= :id";
-		Query  query = session().createQuery(hql);
-		query.setParameter("id", user.getId());
-		List<Mur> followers= query.list();
-		
-		for (Mur f: followers) {
-			System.out.println(f.toString());
+	public void saveOrUpdate(Mur item, EntityManager em, boolean closeConnection) {
+		EntityTransaction tx= em.getTransaction();
+		try {
+			tx.begin();
+			if (item.getId() == null ) {
+				em.persist(item);
+			} else {
+				em.merge(item);
+			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
 		}
-		
-//		return murs;
+		if (closeConnection) {
+			em.close();
+		}
 	}
+
+//	public static void findByFollower(User user) {
+//		String hql = "FROM Mur M WHERE M.followers.id= :id";
+//		Query  query = session().createQuery(hql);
+//		query.setParameter("id", user.getId());
+//		List<Mur> followers= query.list();
+//		
+//		for (Mur f: followers) {
+//			System.out.println(f.toString());
+//		}
+//		
+////		return murs;
+//	}
 	
-	public void setMovie(Movie movie, User user) {
-		Like movie_like= LikeBo.findByType("movie", movie.getId());
+	public void setMovie(Movie movie, User user, EntityManager em) {
+		LikeDislike movie_like= LikeBo.findByType("movie", movie.getId(), em);
 		if(movie_like != null) {
 			mur.setFollower(movie_like.getUser());
 		}
-		Like user_like= LikeBo.findByType("movie", user.getId());
+		LikeDislike user_like= LikeBo.findByType("movie", user.getId(), em);
 		if (user_like != null) {
 			mur.setFollower(user_like.getUser());	
 		}
 		
 		for (Category category: movie.getCategorys()) {
-			Like category_like= LikeBo.findByType(Integer.toString(category.getId()), movie.getId());
+			LikeDislike category_like= LikeBo.findByType(Integer.toString(category.getId()), movie.getId(), em);
 			if(category_like != null) {
 				mur.setFollower((category_like.getUser()));	
 			}
@@ -56,6 +73,6 @@ public class MurBo extends Dao {
 		html.append("<a href='"+URL+"user?id="+user.getId()+"'>"+user.getFirstName()+" "+user.getLastName()+"</a> ");
 		html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		mur.setHtml(html.toString());
-		Dao.save(mur);
+		saveOrUpdate(mur, em, false);
 	}
 }
