@@ -1,32 +1,59 @@
 package fr.dawan.reseauSoc.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Video {
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-	private List<PeopleContent> actors;
-	private List<PeopleContent> realisator;
-	private String language;
+public class Video extends Likable {
 	
-	/*
-	 * *********GETTERS/SETTERS
-	 */
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+	@JoinTable(
+		name= "Video_PeopleContent",
+		joinColumns = { @JoinColumn(name = "Video_id") },
+		inverseJoinColumns = { @JoinColumn(name = "peopleContent_id") }
+	)
+	private List<PeopleContent> actors= new ArrayList<>();
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+	@JoinTable(
+		name= "Video_Category",
+		joinColumns = { @JoinColumn(name = "video_id") },
+		inverseJoinColumns = { @JoinColumn(name = "Category_id") }
+	)
+	private List<Category> categorys= new ArrayList<>();
+	
+	/* ****************************************************************************************
+	 * ****************************GETTERS / SETTERS PERSONEL**********************************
+	 * ***************************************************************************************/
+	
+	public void setActor(PeopleContent actor) {
+		actors.add(actor);
+	}
+	public void setCategory(Category category) {
+		categorys.add(category);
+	}
+
+	
+	/* ****************************************************************************************
+	 * ****************************GETTERS / SETTERS*******************************************
+	 * ***************************************************************************************/	
+	public List<Category> getCategorys() {
+		return categorys;
+	}
+	
+	public void setCategorys(List<Category> categorys) {
+		this.categorys = categorys;
+	}
+	
+	public void setActors(List<PeopleContent> actors) {
+		this.actors = actors;
+	}	
 	public List<PeopleContent> getActors() {
 		return actors;
 	}
-	public void setActors(List<PeopleContent> actors) {
-		this.actors = actors;
-	}
-	public List<PeopleContent> getRealisator() {
-		return realisator;
-	}
-	public void setRealisator(List<PeopleContent> realisator) {
-		this.realisator = realisator;
-	}
-	public String getLanguage() {
-		return language;
-	}
-	public void setLanguage(String language) {
-		this.language = language;
-	}
+	
 }

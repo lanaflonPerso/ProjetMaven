@@ -1,13 +1,38 @@
 package fr.dawan.reseauSoc.beans;
 
-public class Episode extends Video {
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name= "Episode")
+public class Episode extends Likable {
+		
+	@ManyToOne
+	@JoinColumn(name="serie_id")
+	private Serie serie;
 	private int season;
 	private int number;
+	private String title;
 	
-	/*
-	 * *********GETTERS/SETTERS
-	 */
+	/* ****************************************************************************************
+	 * ***************************CONSTRUCTORs*************************************************
+	 * ***************************************************************************************/
+	public Episode() {
+		super();
+	}
+	
+	public Episode(String title, int season, int number) {
+		super();
+		this.season = season;
+		this.number = number;
+		this.title = title;
+	}
+
+	/* ****************************************************************************************
+	 * ***************************GETTERS / SETTERS********************************************
+	 * ***************************************************************************************/
 	public int getSeason() {
 		return season;
 	}
@@ -19,5 +44,17 @@ public class Episode extends Video {
 	}
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Serie getSerie() {
+		return serie;
+	}
+	public void setSerie(Serie serie) {
+		this.serie = serie;
 	}
 }

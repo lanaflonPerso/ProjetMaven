@@ -18,6 +18,7 @@ public class Likable {
 	@GeneratedValue(strategy=GenerationType.AUTO)     
 	@Column(name = "id")  
 	private Integer id;
+	private String type;
 	private int likeCount;
 	private int dislikeCount;
 	
@@ -52,11 +53,20 @@ public class Likable {
 	public void setDislikeCount(int dislikeCount) {
 		this.dislikeCount = dislikeCount;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 
+
+	/* ****************************************************************************************
+	 * ****************************OVERRIDES***************************************************
+	 * ***************************************************************************************/
 	@Override
 	public String toString() {
-		return "Likable [id=" + id + ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount + "]";
-	}
-	
-	
+		return "Likable [id=" + id + ", type=" + type + ", likeCount=" + likeCount + ", dislikeCount=" + dislikeCount
+				+ "]";
+	}	
 }

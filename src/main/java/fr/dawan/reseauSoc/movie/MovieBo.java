@@ -41,7 +41,6 @@ public class MovieBo extends Dao {
 	@SuppressWarnings("unchecked")
 	public static List<Movie> findByTitle(String title) {	
 		EntityManager em= Dao.createEntityManager("JPA");
-		System.out.println("title= "+title);
 		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title LIKE :title") ;
 		query.setParameter("title",  "%"+title+"%");
 		
