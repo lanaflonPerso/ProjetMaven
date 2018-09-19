@@ -7,8 +7,8 @@
 				<thead>
 					<tr>
 						<td>Titre</td>
-						<td>année</td>
-						<td>synopsis</td>
+						<td>Année</td>
+						<td>Synopsis</td>
 					</tr>
 				</thead>
 				
@@ -25,7 +25,7 @@
 		</c:if>	
 		
 		<c:if test="${ not empty peoples }">
-			<h1>Les personnalités</h1>
+			<h1>Les Personnalités</h1>
 			<table class="table">
 				<thead>
 					<tr>
@@ -41,6 +41,27 @@
 							<td><a href='<c:url value="/people?id=${ people.id }" />'>${ people.lastName }</a></td>
 							<td>${ people.firstName }</td>
 							<td>${ people.birthDay }</td>
+						</tr>
+					</c:forEach>	
+				</tbody>
+			</table>
+		</c:if>
+		
+		<c:if test="${ not empty series }">
+			<h1>Les Series</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<td>Titre</td>
+						<td>Date de réalisation</td>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<c:forEach items="${ series }" var="serie">
+						<tr>
+							<td><a href='<c:url value="/serie?id=${ serie.id }" />'>${ serie.title }</a></td>
+							<td>${ serie.releaseDate }</td>
 						</tr>
 					</c:forEach>	
 				</tbody>

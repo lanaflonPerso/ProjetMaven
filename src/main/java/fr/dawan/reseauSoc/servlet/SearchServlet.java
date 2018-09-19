@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.PeopleContent;
+import fr.dawan.reseauSoc.beans.Serie;
 import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.movie.MovieBo;
 import fr.dawan.reseauSoc.people.PeopleContentBo;
+import fr.dawan.reseauSoc.serie.SerieBo;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
@@ -30,8 +32,10 @@ public class SearchServlet extends HttpServlet {
 		
 		List<Movie> movies= MovieBo.findByTitle(value, em);
 		List<PeopleContent> peoples= PeopleContentBo.findByLastName(value, em);
+		List<Serie> series= SerieBo.findByTitle(value, em);
 		request.setAttribute("movies", movies);
 		request.setAttribute("peoples", peoples);
+		request.setAttribute("series", series);
 		
 		request.setAttribute("page", "/WEB-INF/view/Search.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
