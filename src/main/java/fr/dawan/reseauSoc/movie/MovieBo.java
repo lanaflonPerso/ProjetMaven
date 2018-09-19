@@ -16,10 +16,9 @@ public class MovieBo extends Dao {
 	 * @param session
 	 * @return un film
 	 */
-	public static Movie findById(int id) {
-		EntityManager em= Dao.createEntityManager("JPA");
+	public static Movie findById(int id, EntityManager em) {
 		Dao dao= new Dao();
-		return dao.findById(Movie.class, id, em, true);
+		return dao.findById(Movie.class, id, em, false);
 	}
 	
 	public static Movie findByTitleReleaseDate(String title, int releaseDate) {

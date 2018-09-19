@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "like_dislike")
+@Table(name = "Like_Dislike")
 public class Like {
 	
 	@Id

@@ -70,9 +70,9 @@ public class AddSerie {
 		
 		Episode epTwo_One=  new Episode("La Maure aux trousses", 2, 1);
 		epTwo_One.setType("episode");
-		Episode epTwo_Two=  new Episode("L'enfer du disco", 2, 1);
+		Episode epTwo_Two=  new Episode("L'enfer du disco", 2, 2);
 		epTwo_One.setType("episode");
-		Episode epTwo_Three=  new Episode("Retour vers un futur", 2, 1);
+		Episode epTwo_Three=  new Episode("Retour vers un futur", 2, 3);
 		epTwo_One.setType("episode");
 		serie.setEpisode(epTwo_One);
 		serie.setEpisode(epTwo_Two);

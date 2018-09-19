@@ -17,10 +17,7 @@ public class Serie extends Video {
 	private String studio;
 	
 //	private List<PeopleContent> showRunners;
-	@OneToMany(
-	        cascade = CascadeType.ALL, 
-	        orphanRemoval = true
-	    )
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Episode> Episodes= new ArrayList<>();
 	
 	/* ****************************************************************************************

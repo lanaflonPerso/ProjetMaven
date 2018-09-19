@@ -1,14 +1,15 @@
 package fr.dawan.reseauSoc.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name= "Episode")
 public class Episode extends Likable {
 		
-//	@ManyToOne
-//	private Serie serie;
+	@ManyToOne
+	private Serie serie;
 	private int season;
 	private int number;
 	private String title;
@@ -48,10 +49,10 @@ public class Episode extends Likable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-//	public Serie getSerie() {
-//		return serie;
-//	}
-//	public void setSerie(Serie serie) {
-//		this.serie = serie;
-//	}
+	public Serie getSerie() {
+		return serie;
+	}
+	public void setSerie(Serie serie) {
+		this.serie = serie;
+	}
 }

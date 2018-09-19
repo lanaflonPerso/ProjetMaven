@@ -1,6 +1,11 @@
 package fr.dawan.reseauSoc.mur;
 
+import java.util.List;
+
+import org.hibernate.Query;
+
 import fr.dawan.reseauSoc.beans.Category;
+import fr.dawan.reseauSoc.beans.Like;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
@@ -12,12 +17,35 @@ public class MurBo extends Dao {
 	private Mur mur= new Mur();
 	private final String URL= "http://localhost:8080/ReseauSocial/";
 	
+
+	public static void findByFollower(User user) {
+		String hql = "FROM Mur M WHERE M.followers.id= :id";
+		Query  query = session().createQuery(hql);
+		query.setParameter("id", user.getId());
+		List<Mur> followers= query.list();
+		
+		for (Mur f: followers) {
+			System.out.println(f.toString());
+		}
+		
+//		return murs;
+	}
+	
 	public void setMovie(Movie movie, User user) {
-		mur.setFollower((LikeBo.findByType("movie", movie.getId()).getUser()));
-		mur.setFollower((LikeBo.findByType("movie", user.getId()).getUser()));
+		Like movie_like= LikeBo.findByType("movie", movie.getId());
+		if(movie_like != null) {
+			mur.setFollower(movie_like.getUser());
+		}
+		Like user_like= LikeBo.findByType("movie", user.getId());
+		if (user_like != null) {
+			mur.setFollower(user_like.getUser());	
+		}
 		
 		for (Category category: movie.getCategorys()) {
-			mur.setFollower((LikeBo.findByType(Integer.toString(category.getId()), movie.getId()).getUser()));
+			Like category_like= LikeBo.findByType(Integer.toString(category.getId()), movie.getId());
+			if(category_like != null) {
+				mur.setFollower((category_like.getUser()));	
+			}
 		}
 		mur.setUser(user);
 		mur.setShare(true);
