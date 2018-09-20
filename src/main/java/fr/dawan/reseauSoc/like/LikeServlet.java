@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.dawan.reseauSoc.beans.Category;
 import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.LikeDislike;
 import fr.dawan.reseauSoc.beans.Movie;
@@ -57,6 +58,16 @@ public class LikeServlet extends HttpServlet {
 				}
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
 				return;
+			case "category":
+				if(LikeBo.save(like, em)) {
+					like.setType("category");
+					MurBo mBo= new MurBo();
+					Category category= Dao.findById(Category.class, likable.getId(), em);
+					mBo.setCategory(category, user, like, em);
+				}
+				response.sendRedirect(request.getContextPath()+"/category?id="+id);
+				return;
+
 			default:
 				break;
 			}

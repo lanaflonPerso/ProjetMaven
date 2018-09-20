@@ -78,10 +78,24 @@ public class MurBo extends Dao {
 		if(like.getTypeVote() == 1) {
 			html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		} else {
-			html.append(" n'aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+			html.append(" n'aime pas le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		}
 		html.append("<p>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);
+	}
+
+	public void setCategory(Category category, User user, LikeDislike like, EntityManager em) {
+		findUserLike(category, user, em);
+		StringBuilder html= userString(user);
+		if(like.getTypeVote() == 1) {
+			html.append(" aime le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
+		} else {
+			html.append(" n'aime pas le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
+		}
+		html.append("<p>");
+		mur.setHtml(html.toString());
+		saveOrUpdate(mur, em);
+		
 	}
 }
