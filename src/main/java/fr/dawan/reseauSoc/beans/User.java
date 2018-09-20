@@ -1,9 +1,12 @@
 package fr.dawan.reseauSoc.beans;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -23,6 +26,8 @@ public class User extends Likable {
 	private String city;
 	@Column(nullable=false)
 	private String password;
+	@ManyToMany(mappedBy = "followers")
+	private List<Mur> bricks= new ArrayList<>();
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
@@ -75,7 +80,13 @@ public class User extends Likable {
 	public void setPassword(String password) {
 			this.password = MySQLPassword(password);
 	}
-	
+	public List<Mur> getBricks() {
+		return bricks;
+	}
+	public void setBricks(List<Mur> bricks) {
+		this.bricks = bricks;
+	}
+
 	/* ****************************************************************************************
 	 * ****************************OVERRIDE****************************************************
 	 * ***************************************************************************************/

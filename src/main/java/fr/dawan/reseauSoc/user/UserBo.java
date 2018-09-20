@@ -1,8 +1,11 @@
 package fr.dawan.reseauSoc.user;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 
@@ -12,7 +15,7 @@ public class UserBo extends Dao {
 		User user= null;
 		EntityManager em= Dao.createEntityManager("JPA");
 		
-		Query query = em.createQuery("SELECT user FROM User user WHERE user.email = :email") ;
+		Query query = em.createQuery("SELECT user FROM User user WHERE user.email = :email");
 		query.setParameter("email",  email);
 		
 		if(query.getResultList().size() > 0) {
@@ -20,5 +23,11 @@ public class UserBo extends Dao {
 		}
 		em.close();
 		return user;
+	}
+	
+	public static List<Mur> findBricks(int userId, EntityManager em ) {
+		User b = em.find(User.class, userId);
+		List<Mur> murs= b.getBricks();
+		return murs;
 	}
 }
