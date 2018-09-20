@@ -19,7 +19,6 @@ import fr.dawan.reseauSoc.mur.MurBo;
 @WebServlet("/like")
 public class LikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManager em= Dao.createEntityManager("JPA");
 
     public LikeServlet() {
         super();
@@ -27,6 +26,7 @@ public class LikeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id= 0;
+		
 		if(request.getParameter("like").equals("1") || request.getParameter("like").equals("-1")) {
 			User user= (User) request.getSession().getAttribute("user");
 			
@@ -40,13 +40,11 @@ public class LikeServlet extends HttpServlet {
 				return;
 			}
 			
-			if( request.getParameter("like").equals("-1") || request.getParameter("like").equals("1")) {
-				int vote= Integer.valueOf(request.getParameter("like"));
-				like= new LikeDislike(user, likable, vote);
-			} else {
-				response.sendError(400, "Le like n'est pas cohérent");
-				return;
-			}
+
+			int vote= Integer.valueOf(request.getParameter("like"));
+			like= new LikeDislike(user, likable, vote);
+			
+			EntityManager em= Dao.createEntityManager("JPA");
 			
 			switch (request.getParameter("type")) {
 			case "movie":
@@ -59,6 +57,8 @@ public class LikeServlet extends HttpServlet {
 			default:
 				break;
 			}
+			
+			em.close();
 		}else {
 			response.sendError(403, "Le type de contenu n'est pas cohérent!");
 			return;
@@ -69,11 +69,4 @@ public class LikeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
-		em.close();
-	}
-
 }

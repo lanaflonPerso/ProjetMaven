@@ -40,7 +40,7 @@ public class Mur {
 		joinColumns = { @JoinColumn(name = "mur_id") },
 		inverseJoinColumns = { @JoinColumn(name = "follower_id") }
 	)
-	private Set<User> followers;
+	private Set<User> followers= new HashSet<>();
 	private boolean share;
 	
 	@Column(name="mur_dateTime", columnDefinition="DATETIME")
@@ -89,7 +89,7 @@ public class Mur {
 		return followers;
 	}
 	public void setFollowers(Set<User> followers) {
-		this.followers = followers;
+		this.followers.addAll(followers);
 	}
 	public boolean isShare() {
 		return share;

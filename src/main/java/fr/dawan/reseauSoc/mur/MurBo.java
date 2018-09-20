@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.dawan.reseauSoc.beans.Category;
-import fr.dawan.reseauSoc.beans.LikeDislike;
+import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
@@ -16,7 +16,7 @@ public class MurBo extends Dao {
 	private Mur mur= new Mur();
 	private final String URL= "http://localhost:8080/ReseauSocial/";
 	
-	public void saveOrUpdate(Mur item, EntityManager em, boolean closeConnection) {
+	public void saveOrUpdate(Mur item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -29,9 +29,6 @@ public class MurBo extends Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		}
-		if (closeConnection) {
-			em.close();
 		}
 	}
 
@@ -48,31 +45,38 @@ public class MurBo extends Dao {
 ////		return murs;
 //	}
 	
-	public void setMovie(Movie movie, User user, EntityManager em) {
-		LikeDislike movie_like= LikeBo.findByType("movie", movie.getId(), em);
-		if(movie_like != null) {
-			mur.setFollower(movie_like.getUser());
-		}
-		LikeDislike user_like= LikeBo.findByType("movie", user.getId(), em);
-		if (user_like != null) {
-			mur.setFollower(user_like.getUser());	
-		}
-		
-		for (Category category: movie.getCategorys()) {
-			LikeDislike category_like= LikeBo.findByType(Integer.toString(category.getId()), movie.getId(), em);
-			if(category_like != null) {
-				mur.setFollower((category_like.getUser()));	
-			}
-		}
+	private <T extends Likable> void findUserLike(T item, User user, EntityManager em) {
+		mur.setFollowers(LikeBo.findByType(item.getId(), em));
+		mur.setFollowers(LikeBo.findByType(user.getId(), em));
 		mur.setUser(user);
 		mur.setShare(true);
-		mur.setLikable(movie);
-		
+		mur.setLikable(item);
+	}
+	
+	private StringBuilder userString(User user) {
 		StringBuilder html = new StringBuilder("");
 		html.append("<p>");
 		html.append("<a href='"+URL+"user?id="+user.getId()+"'>"+user.getFirstName()+" "+user.getLastName()+"</a> ");
+		
+		return html;
+	}
+	
+	/**
+	 * Enregistre sur le mur un film 
+	 * @param movie
+	 * @param user
+	 * @param em
+	 */
+	public void setMovie(Movie movie, User user, EntityManager em) {
+		findUserLike(movie, user, em);
+		for (Category category: movie.getCategorys()) {
+			mur.setFollowers(LikeBo.findByType(category.getId(), em));
+		}
+		
+		StringBuilder html= userString(user);
 		html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+		html.append("<p>");
 		mur.setHtml(html.toString());
-		saveOrUpdate(mur, em, false);
+		saveOrUpdate(mur, em);
 	}
 }

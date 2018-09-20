@@ -16,7 +16,7 @@ public class Dao {
 		return em;
 	}
 
-	public <T extends Likable> void saveOrUpdate(T item, EntityManager em, boolean closeConnection) {
+	public <T extends Likable> void saveOrUpdate(T item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -29,9 +29,6 @@ public class Dao {
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
-		}
-		if (closeConnection) {
-			em.close();
 		}
 	}
 
