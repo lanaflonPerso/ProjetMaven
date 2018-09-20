@@ -24,7 +24,6 @@ public class LikeBo extends Dao {
 	@SuppressWarnings("unused")
 	public static int like(int id, String hql, EntityManager em) {	
 		em.getTransaction().begin();
-		System.out.println("requete= "+hql);
 		Query query = em.createQuery(hql);
 		query.setParameter("id", id);
 		int rowsUpdated = query.executeUpdate();
@@ -95,29 +94,37 @@ public class LikeBo extends Dao {
 	 * on verifie si l'élément a dèja etait liker on crée un JPQL en fonction et on l'enregistre!
 	 * @param like
 	 * @param em
+	 * @return 
 	 */
-	public static void save(LikeDislike like, EntityManager em) {
+	public static boolean save(LikeDislike like, EntityManager em) {
+		boolean result= true;
 		//on verifie si on a deja liker le produit!
 		LikeDislike isLike= myLike(like.getLikable().getId(), like.getUser().getId(), em);
 		
+		
 		if(isLike != null) {
-			if(like.getTypeVote() != isLike.getTypeVote()) {
-				if(like.getTypeVote() == 1) {
-					LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.likeCount= L.likeCount+1, L.dislikeCount= L.dislikeCount-1  WHERE L.id= :id", em);
-				} else if(like.getTypeVote() == -1) {
-					LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.likeCount= L.likeCount-1, L.dislikeCount= L.dislikeCount+1  WHERE L.id= :id", em);
-
+			if(isLike.getTypeVote() != like.getTypeVote()) {
+				if(like.getTypeVote() != isLike.getTypeVote()) {
+					if(like.getTypeVote() == 1) {
+						LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.likeCount= L.likeCount+1, L.dislikeCount= L.dislikeCount-1  WHERE L.id= :id", em);
+					} else if(like.getTypeVote() == -1) {
+						LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.likeCount= L.likeCount-1, L.dislikeCount= L.dislikeCount+1  WHERE L.id= :id", em);
+	
+					}
+					like.setId(isLike.getId());
+					saveOrUpdate(like, em);
+				} else {
+					return false;
 				}
-				like.setId(isLike.getId());
-				saveOrUpdate(like, em);
 			}
-		}else {
+		} else {
 			saveOrUpdate(like, em);
 			if(like.getTypeVote() == 1) {
 				LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.likeCount= L.likeCount+1 WHERE L.id= :id", em);
 			} else if(like.getTypeVote() == -1) {
 				LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.dislikeCount= L.dislikeCount-1  WHERE L.id= :id", em);
-			}
+			} 
 		}
+		return result;
 	}
 }

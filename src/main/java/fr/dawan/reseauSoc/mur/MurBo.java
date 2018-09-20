@@ -5,6 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import fr.dawan.reseauSoc.beans.Category;
 import fr.dawan.reseauSoc.beans.Likable;
+import fr.dawan.reseauSoc.beans.LikeDislike;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
@@ -67,14 +68,18 @@ public class MurBo extends Dao {
 	 * @param user
 	 * @param em
 	 */
-	public void setMovie(Movie movie, User user, EntityManager em) {
+	public void setMovie(Movie movie, User user, LikeDislike like,EntityManager em) {
 		findUserLike(movie, user, em);
 		for (Category category: movie.getCategorys()) {
 			mur.setFollowers(LikeBo.findByType(category.getId(), em));
 		}
 		
 		StringBuilder html= userString(user);
-		html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+		if(like.getTypeVote() == 1) {
+			html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+		} else {
+			html.append(" n'aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+		}
 		html.append("<p>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);

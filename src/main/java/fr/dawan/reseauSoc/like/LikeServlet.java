@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.LikeDislike;
+import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.movie.MovieBo;
@@ -48,15 +49,18 @@ public class LikeServlet extends HttpServlet {
 			
 			switch (request.getParameter("type")) {
 			case "movie":
-				like.setType("movie");
-				LikeBo.save(like, em);
-				MurBo mBo= new MurBo();
-				mBo.setMovie(MovieBo.findById(likable.getId(), em), user, em);
+				if(LikeBo.save(like, em)) {
+					like.setType("movie");
+					MurBo mBo= new MurBo();
+					Movie movie= MovieBo.findById(likable.getId(), em);
+					mBo.setMovie(movie, user, like, em);
+				}
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
 				return;
 			default:
 				break;
 			}
+			
 			
 			em.close();
 		}else {
