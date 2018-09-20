@@ -6,7 +6,7 @@ import javax.persistence.Query;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 
-public class UserBo {
+public class UserBo extends Dao {
 	
 	public static User findByEmail(String email) {
 		User user= null;

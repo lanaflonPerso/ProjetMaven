@@ -1,4 +1,4 @@
-<c:set var="titlePage" value="Ajout d'un Film" scope="session"/>
+<%-- <c:set var="titlePage" value="Ajout d'un Film" scope="session"/> --%>
 <c:choose>
 	<c:when test="${ error != true }">
 	<div class="row">
@@ -8,7 +8,13 @@
 	
 	  <div class="col-md-8">
 	    <h3>${ movie.title } (${ movie.releaseDate }) </h3>
-	    
+	    <ul>
+	    	<c:forEach items="${ categorys }" var="category">
+		        <li class="list-group-item">
+					<a href='<c:url value="/category?id=${ category.id }" />' >${ category.name }</a>
+		        </li>
+	    	</c:forEach>
+	    </ul>
 		<c:if test="${ sessionScope.user != null  }">
 			<jsp:include page="/WEB-INF/layout/LikeDislike.jsp" >
 			  <jsp:param name="likeCount" value="${ movie.likeCount }" />
@@ -30,7 +36,7 @@
 	    		</li>
 	    	</c:if>
 	    	
-	    	<c:forEach items="${ movie.actors }" var="actor">
+	    	<c:forEach items="${ actors }" var="actor">
 		        <li class="list-group-item">
 					<a href='<c:url value="/people?id=${ actor.id }" />' >${ actor.firstName } ${ actor.lastName }</a>
 		        </li>
@@ -40,6 +46,6 @@
 	</div>
 	</c:when>
 	<c:otherwise>
-		<h1>film introuvable</h1>
+		<h1>Film Introuvable</h1>
 	</c:otherwise>
 </c:choose>

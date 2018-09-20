@@ -44,11 +44,10 @@ public class AddFilm {
 	
 	public static void saveMovie() {
 		EntityManager em= Dao.createEntityManager("JPA");
-		Dao dao= new Dao();
-		dao.saveOrUpdate(getLesDentsDeLaMer(), em, false);
-		dao.saveOrUpdate(getRencontresDuTroisièmeType(), em, false);
-		dao.saveOrUpdate(getLArnaque(), em, false);
-		dao.saveOrUpdate(getExtravagances(), em, false);
+		Dao.saveOrUpdate(getLesDentsDeLaMer(), em);
+		Dao.saveOrUpdate(getRencontresDuTroisièmeType(), em);
+		Dao.saveOrUpdate(getLArnaque(), em);
+		Dao.saveOrUpdate(getExtravagances(), em);
 		em.close();
 	}
 	

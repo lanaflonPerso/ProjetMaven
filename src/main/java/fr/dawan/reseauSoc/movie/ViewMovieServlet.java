@@ -15,13 +15,13 @@ import fr.dawan.reseauSoc.dao.Dao;
 @WebServlet("/movie")
 public class ViewMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManager em= Dao.createEntityManager("JPA");
        
     public ViewMovieServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		EntityManager em= Dao.createEntityManager("JPA");
 		
 		int id= 0;
 		request.setAttribute("error", true);
@@ -34,23 +34,19 @@ public class ViewMovieServlet extends HttpServlet {
 				
 			}
 			
-			Movie movie= MovieBo.findById(id, em);
+			Movie movie= MovieBo.findById(Movie.class, id, em);
 			if(movie != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("movie", movie);
+				request.setAttribute("actors", movie.getActors());
+				request.setAttribute("categorys", movie.getCategorys());
 				request.setAttribute("titlePage", movie.getTitle());	
 			}
 		}
 		
 		request.setAttribute("page", "/WEB-INF/movie/ViewMovie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
 		em.close();
 	}
-	
 	
 }

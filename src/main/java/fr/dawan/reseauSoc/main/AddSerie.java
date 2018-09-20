@@ -12,8 +12,7 @@ public class AddSerie {
 	
 	public static void save() {
 		EntityManager em= Dao.createEntityManager("JPA");
-		Dao dao= new Dao();
-		dao.saveOrUpdate(getCodeQuantum(), em, false);
+		Dao.saveOrUpdate(getCodeQuantum(), em);
 		for (Episode ep: getCodeQuantum().getEpisodes()) {
 			System.out.println("Titre= "+ep.getTitle());
 		}

@@ -1,5 +1,7 @@
 package fr.dawan.reseauSoc.people;
 
+import javax.persistence.EntityManager;
+
 import fr.dawan.reseauSoc.beans.PeopleContent;
 
 public class PeopleContentCtrl {
@@ -41,8 +43,8 @@ public class PeopleContentCtrl {
 		}
 	}
 	
-	public void peopleExist() {
-		PeopleContent exist= PeopleContentBo.SelectByName(people.getFirstName(), people.getLastName());
+	public void peopleExist(EntityManager em) {
+		PeopleContent exist= PeopleContentBo.findByName(people.getFirstName(), people.getLastName(), em);
 		if (exist != null) {
 			people= exist;
 //			msgPeople= "une personalité est déja en base avec le même nom et prénom!";

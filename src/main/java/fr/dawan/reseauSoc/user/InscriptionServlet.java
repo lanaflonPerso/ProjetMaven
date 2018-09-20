@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.user;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,8 +36,9 @@ public class InscriptionServlet extends HttpServlet {
 		
 		UserCtrl ctrl= new UserCtrl(user, pass1, pass2);
 		if (!ctrl.isError()) {
-			user.setPassword(Dao.MySQLPassword(pass1));
-			UserBo.save(user);
+			user.setPassword(pass1);
+			EntityManager em= Dao.createEntityManager("JPA");
+			UserBo.saveOrUpdate(user, em);
 			user.setPassword("");
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect(request.getContextPath()+"/");

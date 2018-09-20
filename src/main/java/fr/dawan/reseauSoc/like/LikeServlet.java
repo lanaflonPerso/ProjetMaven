@@ -52,7 +52,7 @@ public class LikeServlet extends HttpServlet {
 				if(LikeBo.save(like, em)) {
 					like.setType("movie");
 					MurBo mBo= new MurBo();
-					Movie movie= MovieBo.findById(likable.getId(), em);
+					Movie movie= MovieBo.findById(Movie.class, likable.getId(), em);
 					mBo.setMovie(movie, user, like, em);
 				}
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);

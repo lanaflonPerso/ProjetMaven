@@ -42,8 +42,7 @@ public class AddMovieServlet extends HttpServlet {
 		MovieCtrl ctrl= new MovieCtrl(movie);
 		if(!ctrl.isError()) {
 			EntityManager em= Dao.createEntityManager("JPA");
-			Dao dao= new Dao();
-			dao.saveOrUpdate(movie, em, true);
+			Dao.saveOrUpdate(movie, em);
 			response.sendRedirect(request.getContextPath()+"/movie?id="+movie.getId());
 			return;
 		}		

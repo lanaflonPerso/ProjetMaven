@@ -9,14 +9,13 @@ public class AddUser {
 	
 	public static void saveUser() {
 		EntityManager em= Dao.createEntityManager("JPA");
-		Dao dao= new Dao();
-		dao.saveOrUpdate(getVianneyBailleux(), em, false);
-		dao.saveOrUpdate(getSteveHarris() , em, false);
-		dao.saveOrUpdate(getPaulStanley(), em, false);
-		dao.saveOrUpdate(getBruceDickinson(), em, false);
-		dao.saveOrUpdate(getRobHalford(), em, false);
-		dao.saveOrUpdate(getGeneSimmons(), em, false);
-		dao.saveOrUpdate(getPeterCarr(), em, false);
+		Dao.saveOrUpdate(getVianneyBailleux(), em);
+		Dao.saveOrUpdate(getSteveHarris() , em);
+		Dao.saveOrUpdate(getPaulStanley(), em);
+		Dao.saveOrUpdate(getBruceDickinson(), em);
+		Dao.saveOrUpdate(getRobHalford(), em);
+		Dao.saveOrUpdate(getGeneSimmons(), em);
+		Dao.saveOrUpdate(getPeterCarr(), em);
 		em.close();
 	}
 	

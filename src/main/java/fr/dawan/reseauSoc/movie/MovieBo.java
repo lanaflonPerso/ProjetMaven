@@ -9,18 +9,7 @@ import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.dao.Dao;
 
 public class MovieBo extends Dao {
-	
-	/**
-	 * Recherche un film par son Id
-	 * @param id
-	 * @param session
-	 * @return un film
-	 */
-	public static Movie findById(int id, EntityManager em) {
-		Dao dao= new Dao();
-		return dao.findById(Movie.class, id, em, false);
-	}
-	
+		
 	public static Movie findByTitleReleaseDate(String title, int releaseDate) {
 	
 		Movie movie= null;

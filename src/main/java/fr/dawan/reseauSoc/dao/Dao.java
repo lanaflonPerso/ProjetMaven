@@ -16,7 +16,7 @@ public class Dao {
 		return em;
 	}
 
-	public <T extends Likable> void saveOrUpdate(T item, EntityManager em) {
+	public static <T extends Likable> void saveOrUpdate(T item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -32,28 +32,21 @@ public class Dao {
 		}
 	}
 
-	public <T extends Likable> void delete(T item, EntityManager em, boolean closeConnection) {
+	public <T extends Likable> void delete(T item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		tx.begin();
 		if(item.getId() != null) {
 			em.remove(item);
 		}
 		tx.commit();
-		if(closeConnection) {
-			em.close();
-		}
 	}
 	
-	public <T extends Likable> T findById(Class<T> clazz, int id, EntityManager em, boolean closeConnection) {
+	public static <T extends Likable> T findById(Class<T> clazz, int id, EntityManager em) {
 		T result= null;
 		try {
 			result=em.find(clazz, id);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		if(closeConnection) {
-			em.close();
 		}
 		return result;
 	}
