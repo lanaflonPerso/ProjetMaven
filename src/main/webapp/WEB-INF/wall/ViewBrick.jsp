@@ -21,8 +21,6 @@
 				
 			<footer class="footerMessage">
 				<span>il y a environ une heure</span>
-				<span><a href="<c:url value = "" />">J'aime</a></span>
-				<span><a href="<c:url value = "/comment/add?id=${ brick.id }" />">Commenter</a></span>
 				<span><a href="<c:url value = "/comment?id=${ brick.id }" />">${ brick.countComment() } commentaire<c:if test="${ brick.countComment() > 1 }">s</c:if></a></span>
 			</footer>
 		</div>

@@ -1,5 +1,7 @@
 package fr.dawan.reseauSoc.beans;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity  
 @Table(name = "Likable")  
@@ -21,7 +25,12 @@ public class Likable {
 	private String type;
 	private int likeCount;
 	private int dislikeCount;
+	@Temporal(value=TemporalType.DATE)
+	private Date created_Date;
 	
+	/* ****************************************************************************************
+	 * ****************************CONSTRUCTEUR************************************************
+	 * ***************************************************************************************/
 	public Likable() {
 		super();
 	}
@@ -59,7 +68,12 @@ public class Likable {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	public Date getCreated_Date() {
+		return created_Date;
+	}
+	public void setCreated_Date(Date created_Date) {
+		this.created_Date = created_Date;
+	}
 
 	/* ****************************************************************************************
 	 * ****************************OVERRIDES***************************************************

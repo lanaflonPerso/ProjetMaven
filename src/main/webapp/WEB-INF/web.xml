@@ -17,7 +17,7 @@
   	<url-pattern>/like</url-pattern>
   	<url-pattern>/wall</url-pattern>
   	<url-pattern>/shortcontent</url-pattern>
-  	<url-pattern>/comment/add</url-pattern>
+  	<url-pattern>/comment</url-pattern>
   </filter-mapping>
 
  <!-- *************************WELCOME FILE******************************* -->

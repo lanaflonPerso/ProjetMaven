@@ -1,6 +1,7 @@
 package fr.dawan.reseauSoc.beans;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -123,7 +124,7 @@ public class Mur {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
+	
 	/* ****************************************************************************************
 	 * ****************************OVERRIDE****************************************************
 	 * ***************************************************************************************/
