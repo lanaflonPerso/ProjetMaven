@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="col-md-12">
-		<form class="form-inline" method="post" action="<c:url value="/comment" />">
+		<form class="form-inline" method="post" action="<c:url value="/comment/add" />">
 			<fieldset class="form-group">
 				<legend>Commantaire</legend>
 				<c:if test="${ error.error }">

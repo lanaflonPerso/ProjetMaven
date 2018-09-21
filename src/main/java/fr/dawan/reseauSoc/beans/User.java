@@ -28,9 +28,6 @@ public class User extends Likable {
 	@Column(nullable=false)
 	private String password;
 	
-//	@OneToMany(fetch= FetchType.LAZY)
-//	private List<Mur> myBricks= new ArrayList<>();
-	
 	@ManyToMany(mappedBy = "followers", fetch= FetchType.LAZY)
 	private List<Mur> bricks= new ArrayList<>();
 	
