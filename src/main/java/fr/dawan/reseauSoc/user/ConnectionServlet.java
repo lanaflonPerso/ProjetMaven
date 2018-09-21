@@ -39,7 +39,7 @@ public class ConnectionServlet extends HttpServlet {
 		if(user != null) {
 			if (password.equals(user.getPassword())) {
 				request.getSession().setAttribute("user", user);
-				response.sendRedirect(request.getContextPath()+"/");
+				response.sendRedirect(request.getContextPath()+"/wall");
 				return;
 			}
 		}

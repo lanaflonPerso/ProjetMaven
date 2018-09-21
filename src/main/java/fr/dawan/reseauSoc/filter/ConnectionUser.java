@@ -28,11 +28,9 @@ public class ConnectionUser implements Filter {
         	res.sendRedirect(req.getContextPath()+"/user/connection");
         	return;
         } else {
-        	chain.doFilter(request, response);        	
+        	chain.doFilter(request, response);
         }
 	}
-
-
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
 

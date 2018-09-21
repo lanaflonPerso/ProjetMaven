@@ -1,19 +1,22 @@
 <form class="form-inline" method="post" action="<c:url value="/shortcontent"/>">
 	<fieldset class="form-group">
 		<legend>Ajouter un message sur le mur</legend>
-		<textarea class="form-control" id="messageForm" name="contenu" rows="3" cols="50"></textarea>
+		<p>erreur= ${ error.error } ${ error.msgShortContent }</p>
+		<c:if test="${ error.error }">
+			<p class="text-danger">${ error.msgShortContent }</p>
+		</c:if>
+		<textarea class="form-control" id="messageForm" name="shortContent" rows="3" cols="50">${ error.shortContent }</textarea>
 		<button type="submit" class="btn btn-primary">Envoyer</button>
 	</fieldset>    
 </form>
-
 <c:forEach items="${ bricks }" var="brick">
 	<div class="row">
 		<div style="background-color: #ffece6; margin: 20px;" class="col-md-12">
 			<header class="headerMessage">
 				<span>
-				<%-- 	<c:if test = "${ prive }"> --%>
+				 	<c:if test = "${ brick.user.id == sessionScope.user.id }"> 
 						 <c:choose>
-							<c:when test="${ brick.share }">
+							<c:when test="${ brick.share && brick.user.id == sessionScope.user.id }">
 								<a href="<c:url value = "/wall?id=${ brick.id }&partage=0" />">partage plus</a>
 							</c:when>
 
@@ -21,8 +24,7 @@
 								<a href="<c:url value = "/wall?id=${ brick.id }&partage=1"/>">on partage</a>
 							</c:otherwise>
 						</c:choose>
-				<%-- 	</c:if> --%>
-					
+					</c:if> 	
 				</span>
 			</header>
 			<p>${ brick.html }</p>

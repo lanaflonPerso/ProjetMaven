@@ -41,7 +41,6 @@ public class User extends Likable {
 		try {
 			utf8 = password.getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return "*" + DigestUtils.sha1Hex(DigestUtils.sha1(utf8)).toUpperCase();

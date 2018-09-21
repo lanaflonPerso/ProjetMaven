@@ -17,7 +17,7 @@ public class MurBo extends Dao {
 	private Mur mur= new Mur();
 	private final String URL= "http://localhost:8080/ReseauSocial/";
 	
-	public void saveOrUpdate(Mur item, EntityManager em) {
+	public static void saveOrUpdate(Mur item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -97,5 +97,10 @@ public class MurBo extends Dao {
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);
 		
+	}
+	
+	public static void setShorContent(Mur wall, EntityManager em) {
+		wall.setFollowers(LikeBo.findByType(wall.getUser().getId(), em));
+		saveOrUpdate(wall, em);
 	}
 }

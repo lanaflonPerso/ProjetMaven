@@ -46,7 +46,7 @@ public class Mur {
 	@Column(name="mur_dateTime", columnDefinition="DATETIME")
 	@Temporal(TemporalType.DATE)
 	private Calendar dateTime;
-	
+	@Column(length = 500)
 	private String html;
 	
 	
@@ -109,7 +109,14 @@ public class Mur {
 		this.html = html;
 	}
 
+
 	/* ****************************************************************************************
 	 * ****************************OVERRIDE****************************************************
 	 * ***************************************************************************************/
+	@Override
+	public String toString() {
+		return "Mur [id=" + id + ", user=" + user + ", likable=" + likable + ", followers=" + followers + ", share="
+				+ share + ", dateTime=" + dateTime + ", html=" + html + "]";
+	}
+	
 }

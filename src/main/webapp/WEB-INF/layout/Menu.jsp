@@ -8,7 +8,7 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<li class="nav-item active"><a class="nav-link"
-				href="<c:url value= "/mur/prive" />">Mur Prive<span
+				href="<c:url value= "/wall" />">Mon Mur<span
 					class="sr-only">(current)</span></a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="<c:url value= "/mur/public" />">Mur Public</a></li>
