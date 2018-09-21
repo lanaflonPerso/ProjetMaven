@@ -67,13 +67,22 @@ public class LikeServlet extends HttpServlet {
 				}
 				response.sendRedirect(request.getContextPath()+"/category?id="+id);
 				return;
-
+			case "user":
+				if(LikeBo.save(like, em)) {
+					like.setType("user");
+					MurBo mBo= new MurBo();
+					User searchedUser= Dao.findById(User.class, likable.getId(), em);
+					mBo.setUser(searchedUser, user, like, em);
+				}
+				response.sendRedirect(request.getContextPath()+"/user?id="+id);
+				return;
 			default:
 				break;
 			}
 			
 			
 			em.close();
+			Dao.close();
 		}else {
 			response.sendError(403, "Le type de contenu n'est pas cohérent!");
 			return;

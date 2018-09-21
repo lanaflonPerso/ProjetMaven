@@ -54,14 +54,6 @@ public class MurBo extends Dao {
 		mur.setLikable(item);
 	}
 	
-	private StringBuilder userString(User user) {
-		StringBuilder html = new StringBuilder("");
-		html.append("<p>");
-		html.append("<a href='"+URL+"user?id="+user.getId()+"'>"+user.getFirstName()+" "+user.getLastName()+"</a> ");
-		
-		return html;
-	}
-	
 	/**
 	 * Enregistre sur le mur un film 
 	 * @param movie
@@ -74,26 +66,24 @@ public class MurBo extends Dao {
 			mur.setFollowers(LikeBo.findByType(category.getId(), em));
 		}
 		
-		StringBuilder html= userString(user);
+		StringBuilder html= new StringBuilder();
 		if(like.getTypeVote() == 1) {
-			html.append(" aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+			html.append("aime le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		} else {
-			html.append(" n'aime pas le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
+			html.append("n'aime pas le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		}
-		html.append("<p>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);
 	}
 
 	public void setCategory(Category category, User user, LikeDislike like, EntityManager em) {
 		findUserLike(category, user, em);
-		StringBuilder html= userString(user);
+		StringBuilder html= new StringBuilder();
 		if(like.getTypeVote() == 1) {
-			html.append(" aime le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
+			html.append("aime le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
 		} else {
-			html.append(" n'aime pas le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
+			html.append("n'aime pas le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
 		}
-		html.append("<p>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);
 		
@@ -102,5 +92,18 @@ public class MurBo extends Dao {
 	public static void setShorContent(Mur wall, EntityManager em) {
 		wall.setFollowers(LikeBo.findByType(wall.getUser().getId(), em));
 		saveOrUpdate(wall, em);
+	}
+
+	public void setUser(User searchedUser, User user, LikeDislike like, EntityManager em) {
+		findUserLike(searchedUser, user, em);
+		StringBuilder html = new StringBuilder();
+		if(like.getTypeVote() == 1) {
+			html.append("suit ");
+		} else {
+			html.append("ne souhaite pas suivre ");
+		}
+		html.append("<a href='"+URL+"user?id="+searchedUser.getId()+"'>"+searchedUser.getFirstName()+" "+searchedUser.getLastName()+"</a>");
+		mur.setHtml(html.toString());
+		saveOrUpdate(mur, em);	
 	}
 }

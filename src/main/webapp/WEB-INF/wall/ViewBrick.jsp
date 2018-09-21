@@ -15,9 +15,10 @@
 						</c:choose>
 					</c:if> 	
 				</span>
-				<p>${ brick.user.firstName } ${ brick.user.lastName }</p>
 			</header>
-			<p>${ brick.html }</p>
+			
+			<p><a href='<c:url value="/user?id=${ brick.user.id }" />'>${ brick.user.firstName } ${ brick.user.lastName }</a> ${ brick.html }</p>
+				
 			<footer class="footerMessage">
 				<span>il y a environ une heure</span>
 				<span><a href="<c:url value = "" />">J'aime</a></span>
