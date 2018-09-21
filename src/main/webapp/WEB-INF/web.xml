@@ -17,18 +17,8 @@
   	<url-pattern>/like</url-pattern>
   	<url-pattern>/wall</url-pattern>
   	<url-pattern>/shortcontent</url-pattern>
+  	<url-pattern>/comment/add</url-pattern>
   </filter-mapping>
-  <servlet>
-  	<description>
-  	</description>
-  	<display-name>ViewUserServlet</display-name>
-  	<servlet-name>ViewUserServlet</servlet-name>
-  	<servlet-class>fr.dawan.reseauSoc.user.ViewUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>ViewUserServlet</servlet-name>
-  	<url-pattern>/user</url-pattern>
-  </servlet-mapping>
 
  <!-- *************************WELCOME FILE******************************* -->
   <welcome-file-list>

@@ -22,8 +22,8 @@
 			<footer class="footerMessage">
 				<span>il y a environ une heure</span>
 				<span><a href="<c:url value = "" />">J'aime</a></span>
-				<span><a href="<c:url value = "" />">Commenter</a></span>
-				<span><a href="<c:url value = "" />">Afficher le suivi</a></span>
+				<span><a href="<c:url value = "/comment/add?id=${ brick.id }" />">Commenter</a></span>
+				<span><a href="<c:url value = "/comment" />">Afficher le suivi</a></span>
 			</footer>
 		</div>
 	</div>

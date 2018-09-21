@@ -17,6 +17,16 @@ public class MurBo extends Dao {
 	private Mur mur= new Mur();
 	private final String URL= "http://localhost:8080/ReseauSocial/";
 	
+	public static Mur findById(int id, EntityManager em) {
+		Mur result= null;
+		try {
+			result=em.find(Mur.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public static void saveOrUpdate(Mur item, EntityManager em) {
 		EntityTransaction tx= em.getTransaction();
 		try {
@@ -33,19 +43,6 @@ public class MurBo extends Dao {
 		}
 	}
 
-//	public static void findByFollower(User user) {
-//		String hql = "FROM Mur M WHERE M.followers.id= :id";
-//		Query  query = session().createQuery(hql);
-//		query.setParameter("id", user.getId());
-//		List<Mur> followers= query.list();
-//		
-//		for (Mur f: followers) {
-//			System.out.println(f.toString());
-//		}
-//		
-////		return murs;
-//	}
-	
 	private <T extends Likable> void findUserLike(T item, User user, EntityManager em) {
 		mur.setFollowers(LikeBo.findByType(item.getId(), em));
 		mur.setFollowers(LikeBo.findByType(user.getId(), em));
