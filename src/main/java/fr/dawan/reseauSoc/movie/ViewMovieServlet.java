@@ -25,7 +25,7 @@ public class ViewMovieServlet extends HttpServlet {
 		
 		int id= 0;
 		request.setAttribute("error", true);
-		request.setAttribute("titlePage", "film inconnue");
+		request.setAttribute("titlePage", "Film Inconnue");
 		
 		if(request.getParameter("id") != null) {
 			try {
@@ -48,5 +48,4 @@ public class ViewMovieServlet extends HttpServlet {
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 		em.close();
 	}
-	
 }

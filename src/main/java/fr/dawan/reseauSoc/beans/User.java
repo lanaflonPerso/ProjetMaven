@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,7 +27,11 @@ public class User extends Likable {
 	private String city;
 	@Column(nullable=false)
 	private String password;
-	@ManyToMany(mappedBy = "followers")
+	
+//	@OneToMany(fetch= FetchType.LAZY)
+//	private List<Mur> myBricks= new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "followers", fetch= FetchType.LAZY)
 	private List<Mur> bricks= new ArrayList<>();
 	
 	/* ****************************************************************************************
@@ -85,15 +90,17 @@ public class User extends Likable {
 	public void setBricks(List<Mur> bricks) {
 		this.bricks = bricks;
 	}
+//	public List<Mur> getMyBricks() {
+//		return myBricks;
+//	}
+//	public void setMyBricks(List<Mur> myBricks) {
+//		this.myBricks = myBricks;
+//	}
 
 	/* ****************************************************************************************
 	 * ****************************OVERRIDE****************************************************
 	 * ***************************************************************************************/
-	@Override
-	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", city="
-				+ city + "]";
-	}
+
 
 	@Override
 	public int hashCode() {
@@ -105,6 +112,12 @@ public class User extends Likable {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", city=" + city
+				+ ", password=" + password + ", bricks=" + bricks + "]";
 	}
 
 	@Override

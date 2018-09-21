@@ -7,13 +7,20 @@ import javax.persistence.Persistence;
 
 import fr.dawan.reseauSoc.beans.Likable;
 
+	
 public class Dao {
 	
+	private static EntityManagerFactory eef;
+	
 	public static EntityManager createEntityManager(String persistenceUnitName) {
-		EntityManagerFactory eef= Persistence.createEntityManagerFactory(persistenceUnitName);
+		eef= Persistence.createEntityManagerFactory(persistenceUnitName);
 		EntityManager em= eef.createEntityManager();
 		
 		return em;
+	}
+	
+	public static void close() {
+		eef.close();
 	}
 
 	public static <T extends Likable> void saveOrUpdate(T item, EntityManager em) {
