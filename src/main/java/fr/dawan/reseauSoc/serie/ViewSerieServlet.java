@@ -15,7 +15,6 @@ import fr.dawan.reseauSoc.dao.Dao;
 @WebServlet("/serie")
 public class ViewSerieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManager em= Dao.createEntityManager("JPA");
 	
     public ViewSerieServlet() {
         super();
@@ -23,6 +22,7 @@ public class ViewSerieServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntityManager em= Dao.createEntityManager("JPA");
 		int id= 0;
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Serie Inconnue");
@@ -34,7 +34,7 @@ public class ViewSerieServlet extends HttpServlet {
 				
 			}
 			
-			Serie serie= SerieBo.findById(id, em);
+			Serie serie= Dao.findById(Serie.class, id, em);
 			if(serie != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("serie", serie);
@@ -44,12 +44,7 @@ public class ViewSerieServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/serie/ViewSerie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
 		em.close();
-	}
-	
+		Dao.close();
+	}	
 }

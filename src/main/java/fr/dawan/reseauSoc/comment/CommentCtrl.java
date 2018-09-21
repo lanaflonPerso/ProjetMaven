@@ -15,7 +15,7 @@ public class CommentCtrl {
 	public CommentCtrl(String contenu,User user, Mur wall) {
 		comment.setWall(wall);
 		comment.setUser(user);
-		comment.setCreated_Date(new Date());
+		comment.setCreatedDate(new Date());
 		ctrlContenu(contenu);
 	}
 

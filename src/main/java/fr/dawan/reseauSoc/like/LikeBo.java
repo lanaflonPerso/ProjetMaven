@@ -21,7 +21,6 @@ public class LikeBo extends Dao {
 	 * @param em L'EntityManager
 	 * @return
 	 */
-	@SuppressWarnings("unused")
 	public static int like(int id, String hql, EntityManager em) {	
 		em.getTransaction().begin();
 		Query query = em.createQuery(hql);
@@ -38,7 +37,6 @@ public class LikeBo extends Dao {
 	 * @param userId id l'utilisateur courant
 	 * @return un object Like
 	 */
-	@SuppressWarnings("unused")
 	public static LikeDislike myLike(int id, int userId, EntityManager em) {
 		LikeDislike like= null;
 

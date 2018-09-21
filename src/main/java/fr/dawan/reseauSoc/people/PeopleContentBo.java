@@ -10,11 +10,11 @@ import fr.dawan.reseauSoc.dao.Dao;
 
 public class PeopleContentBo extends Dao {
 		
-	public static PeopleContent findById(int id) {
-		EntityManager em= Dao.createEntityManager("JPA");
-		Dao dao= new Dao();
-		return dao.findById(PeopleContent.class, id, em);
-	}
+//	public static PeopleContent findById(int id) {
+//		EntityManager em= Dao.createEntityManager("JPA");
+//		Dao dao= new Dao();
+//		return dao.findById(PeopleContent.class, id, em);
+//	}
 	
 	@SuppressWarnings("unchecked")
 	public static List<PeopleContent> findByLastName(String lastName, EntityManager em) {

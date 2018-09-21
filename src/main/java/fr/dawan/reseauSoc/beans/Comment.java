@@ -25,7 +25,7 @@ public class Comment {
 	@Column(length=500)
 	private String contenu;
 	@Temporal(value=TemporalType.DATE)
-	private Date created_Date;
+	private Date createdDate;
 	
 	/* ****************************************************************************************
 	 * ****************************GETTERS / SETTERS*******************************************
@@ -54,10 +54,10 @@ public class Comment {
 	public void setWall(Mur wall) {
 		this.wall = wall;
 	}
-	public Date getCreated_Date() {
-		return created_Date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreated_Date(Date created_Date) {
-		this.created_Date = created_Date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 }

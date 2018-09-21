@@ -26,7 +26,7 @@ public class Likable {
 	private int likeCount;
 	private int dislikeCount;
 	@Temporal(value=TemporalType.DATE)
-	private Date created_Date;
+	private Date createdDate;
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
@@ -68,11 +68,11 @@ public class Likable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Date getCreated_Date() {
-		return created_Date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreated_Date(Date created_Date) {
-		this.created_Date = created_Date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	/* ****************************************************************************************

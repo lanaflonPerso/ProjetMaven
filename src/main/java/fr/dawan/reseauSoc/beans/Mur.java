@@ -1,6 +1,5 @@
 package fr.dawan.reseauSoc.beans;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -47,14 +46,12 @@ public class Mur {
 	)
 	private Set<User> followers= new HashSet<>();
 	private boolean share;
-	
-	@Column(name="mur_dateTime", columnDefinition="DATETIME")
-	@Temporal(TemporalType.DATE)
-	private Calendar dateTime;
 	@Column(length = 500)
 	private String html;
 	@OneToMany(mappedBy = "wall", fetch= FetchType.LAZY)
 	private List<Comment> comments= new LinkedList<>();
+	@Temporal(value=TemporalType.DATE)
+	private Date createdDate;
 	
 	/* ****************************************************************************************
 	 * ****************************CONSTRUCTEUR************************************************
@@ -106,12 +103,6 @@ public class Mur {
 	public void setShare(boolean share) {
 		this.share = share;
 	}
-	public Calendar getDateTime() {
-		return dateTime;
-	}
-	public void setDateTime(Calendar dateTime) {
-		this.dateTime = dateTime;
-	}
 	public String getHtml() {
 		return html;
 	}
@@ -124,13 +115,19 @@ public class Mur {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	/* ****************************************************************************************
 	 * ****************************OVERRIDE****************************************************
 	 * ***************************************************************************************/
 	@Override
 	public String toString() {
 		return "Mur [id=" + id + ", user=" + user + ", likable=" + likable + ", followers=" + followers + ", share="
-				+ share + ", dateTime=" + dateTime + ", html=" + html + "]";
+				+ share + ", html=" + html + "]";
 	}
 }

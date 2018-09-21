@@ -1,5 +1,7 @@
 package fr.dawan.reseauSoc.mur;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -49,6 +51,7 @@ public class MurBo extends Dao {
 		mur.setUser(user);
 		mur.setShare(true);
 		mur.setLikable(item);
+		mur.setCreatedDate(new Date());
 	}
 	
 	/**

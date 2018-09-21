@@ -8,7 +8,10 @@
 		<p><a href='<c:url value="/user?id=${ brick.user.id }" />'>${ brick.user.firstName } ${ brick.user.lastName }</a> ${ brick.html }</p>
 		
 		<c:forEach items="${ brick.comments }" var="comment">
-			<p><a href='<c:url value="/user?id=${ comment.user.id }" />'>${ comment.user.firstName } ${ comment.user.lastName }</a></p>
+			<p>
+				<a href='<c:url value="/user?id=${ comment.user.id }" />'>${ comment.user.firstName } ${ comment.user.lastName }</a>
+				<fmt:formatDate value="${ comment.createdDate }" pattern="dd/MM/yyyy" />
+			</p>
 			<p>${ comment.contenu }</p>
 		</c:forEach>
 	</div>
