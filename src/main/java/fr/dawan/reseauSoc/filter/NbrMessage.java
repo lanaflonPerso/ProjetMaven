@@ -39,8 +39,6 @@ public class NbrMessage implements Filter {
         }
         chain.doFilter(request, response);
 	}
-
-
 	public void init(FilterConfig fConfig) throws ServletException {
 
 	}

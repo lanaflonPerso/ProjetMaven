@@ -38,8 +38,10 @@
   	<url-pattern>/wall</url-pattern>
   	<url-pattern>/shortcontent</url-pattern>
   	<url-pattern>/comment</url-pattern>
-  	<url-pattern>/message</url-pattern>
-  	  	<url-pattern>/mailbox</url-pattern>
+	<url-pattern>/message</url-pattern>
+	<url-pattern>/mailbox</url-pattern>
+	<url-pattern>/mailbox/view</url-pattern>
+  	  	
   </filter-mapping>
   
  <!-- ********************MAPPING FILTER SEARCH FOLLOWER************* -->
@@ -48,9 +50,9 @@
   	<url-pattern>/people</url-pattern>
   	<url-pattern>/movie</url-pattern>
   	<url-pattern>/user</url-pattern>
+  </filter-mapping>
   	
 <!-- ********************MAPPING FILTER NOMBRE MESSAGE************** -->
-  </filter-mapping>
   <filter-mapping>
   	<filter-name>NbrMessage</filter-name>
   	<url-pattern>/*</url-pattern>

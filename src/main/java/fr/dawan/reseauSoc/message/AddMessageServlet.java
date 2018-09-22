@@ -32,7 +32,6 @@ public class AddMessageServlet extends HttpServlet {
 		request.setAttribute("receiverId", receiverId);
 		request.setAttribute("page", "/WEB-INF/message/FormMessage.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
