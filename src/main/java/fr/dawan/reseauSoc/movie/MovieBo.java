@@ -23,6 +23,7 @@ public class MovieBo extends Dao {
 			movie = (Movie) query.getResultList().get(0);
 		}
 		em.close();
+		Dao.close();
 		return movie;	
 	}
 	

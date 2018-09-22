@@ -15,6 +15,13 @@
   	<filter-name>FollowersFilter</filter-name>
   	<filter-class>fr.dawan.reseauSoc.filter.FollowersFilter</filter-class>
   </filter>
+  <filter>
+  	<description>
+  	</description>
+  	<display-name>NbrMessage</display-name>
+  	<filter-name>NbrMessage</filter-name>
+  	<filter-class>fr.dawan.reseauSoc.filter.NbrMessage</filter-class>
+  </filter>
 
 <!-- ********************MAPPING FILTER CONNECTION USER*************** -->
   <filter-mapping>
@@ -26,6 +33,7 @@
   	<url-pattern>/shortcontent</url-pattern>
   	<url-pattern>/comment</url-pattern>
   	<url-pattern>/message</url-pattern>
+  	  	<url-pattern>/mailbox</url-pattern>
   </filter-mapping>
   
  <!-- ********************MAPPING FILTER SEARCH FOLLOWER************* -->
@@ -36,6 +44,21 @@
   	<url-pattern>/user</url-pattern>
   	
   </filter-mapping>
+  <filter-mapping>
+  	<filter-name>NbrMessage</filter-name>
+  	<url-pattern>/NbrMessage</url-pattern>
+  </filter-mapping>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>MailBoxServlet</display-name>
+  	<servlet-name>MailBoxServlet</servlet-name>
+  	<servlet-class>fr.dawan.reseauSoc.message.MailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MailBoxServlet</servlet-name>
+  	<url-pattern>/mailbox</url-pattern>
+  </servlet-mapping>
 
  <!-- ********************WELCOME FILE******************************* -->
   <welcome-file-list>
