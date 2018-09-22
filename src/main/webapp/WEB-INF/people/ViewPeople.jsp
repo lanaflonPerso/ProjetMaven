@@ -15,7 +15,7 @@
 			  <jsp:param name="dislikeCount" value="${ people.dislikeCount }" />
 			  <jsp:param name="progressBar" value="${ 100*(people.likeCount / (people.likeCount + people.dislikeCount)) }" />
 			  <jsp:param name="myVote" value="is-disliked" />
-			  <jsp:param name="url" value="&id=${ people.id }&type=movie" />
+			  <jsp:param name="url" value="&id=${ people.id }&type=people" />
 			</jsp:include>
 		</c:if>
 		

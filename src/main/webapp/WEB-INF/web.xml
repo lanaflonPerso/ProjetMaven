@@ -8,8 +8,15 @@
   	<filter-name>ConnectionUser</filter-name>
   	<filter-class>fr.dawan.reseauSoc.filter.ConnectionUser</filter-class>
   </filter>
+  <filter>
+  	<description>
+  	</description>
+  	<display-name>FollowersFilter</display-name>
+  	<filter-name>FollowersFilter</filter-name>
+  	<filter-class>fr.dawan.reseauSoc.filter.FollowersFilter</filter-class>
+  </filter>
 
-<!-- *************************MAPPING FILTER******************************* -->
+<!-- ********************MAPPING FILTER CONNECTION USER*************** -->
   <filter-mapping>
   	<filter-name>ConnectionUser</filter-name>
   	<url-pattern>/movie/add</url-pattern>
@@ -19,8 +26,17 @@
   	<url-pattern>/shortcontent</url-pattern>
   	<url-pattern>/comment</url-pattern>
   </filter-mapping>
+  
+ <!-- ********************MAPPING FILTER SEARCH FOLLOWER************* -->
+  <filter-mapping>
+  	<filter-name>FollowersFilter</filter-name>
+  	<url-pattern>/people</url-pattern>
+  	<url-pattern>/movie</url-pattern>
+  	<url-pattern>/user</url-pattern>
+  	
+  </filter-mapping>
 
- <!-- *************************WELCOME FILE******************************* -->
+ <!-- ********************WELCOME FILE******************************* -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

@@ -74,8 +74,8 @@ public class PeopleContent extends Likable {
 	public int getBirthDay() {
 		return birthDay;
 	}
-	public void setBirthDay(int i) {
-		this.birthDay = i;
+	public void setBirthDay(int year) {
+		this.birthDay = year;
 	}
 	public List<Function> getFunctions() {
 		return functions;

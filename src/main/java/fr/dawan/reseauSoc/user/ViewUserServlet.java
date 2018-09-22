@@ -36,12 +36,15 @@ public class ViewUserServlet extends HttpServlet {
 				
 			}
 			List<Mur> bricks= UserBo.findMyBricks(id, em );
-	
-			User searchedUser= bricks.get(0).getUser();
+			if (bricks.size() > 0) {
+				User searchedUser= bricks.get(0).getUser();
 				request.setAttribute("error", false);
 				request.setAttribute("searchedUser", searchedUser);
 				request.setAttribute("bricks", bricks);
-			request.setAttribute("titlePage", searchedUser.getFirstName()+" "+searchedUser.getLastName());	
+				request.setAttribute("titlePage", searchedUser.getFirstName()+" "+searchedUser.getLastName());		
+			} else {
+				response.sendError(404, "utilisateur inconnue");
+			}
 
 		}		
 		request.setAttribute("page", "/WEB-INF/user/ViewUser.jsp");

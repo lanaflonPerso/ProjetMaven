@@ -39,9 +39,6 @@ public class ViewMovieServlet extends HttpServlet {
 			
 			Movie movie= MovieBo.findById(Movie.class, id, em);
 			if(movie != null) {
-				Set<User> followers= LikeBo.findByType(id, em);
-				
-				request.setAttribute("followers", followers);
 				request.setAttribute("error", false);
 				request.setAttribute("movie", movie);
 				request.setAttribute("actors", movie.getActors());

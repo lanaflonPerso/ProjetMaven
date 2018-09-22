@@ -13,6 +13,7 @@ import fr.dawan.reseauSoc.beans.Category;
 import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.LikeDislike;
 import fr.dawan.reseauSoc.beans.Movie;
+import fr.dawan.reseauSoc.beans.PeopleContent;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.movie.MovieBo;
@@ -75,6 +76,15 @@ public class LikeServlet extends HttpServlet {
 					mBo.setUser(searchedUser, user, like, em);
 				}
 				response.sendRedirect(request.getContextPath()+"/user?id="+id);
+				return;
+			case "people":
+				if(LikeBo.save(like, em)) {
+					like.setType("people");
+					MurBo mBo= new MurBo();
+					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId(), em);
+					mBo.setPeopleContent(people, user, like, em);
+				}
+				response.sendRedirect(request.getContextPath()+"/people?id="+id);
 				return;
 			default:
 				break;

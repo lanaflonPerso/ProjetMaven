@@ -36,16 +36,24 @@ public class SavePeopleContentServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PeopleContent people= new PeopleContent();
-		people.setLastName(request.getParameter("lastName"));
-		people.setFirstName(request.getParameter("firstName"));
-		people.setBiography(request.getParameter("biography"));
-		people.setPicture(request.getParameter("picture"));
+		EntityManager em= Dao.createEntityManager("JPA");
+		String firstName= request.getParameter("lastName");
+		String lastName= request.getParameter("firstName");
+		System.out.println("nom= "+lastName);
+		System.out.println("prenom = "+firstName );
+		String biography= request.getParameter("biography");
+		String picture= request.getParameter("picture");
+		int birthday = 0;
+		try {
+			if(request.getParameter("birthday") != null)
+			birthday= Integer.valueOf(request.getParameter("birthday"));
+		} catch (Exception e) {
+		}
 		
-		PeopleContentCtrl ctrl= new PeopleContentCtrl(people);
+		PeopleContentCtrl ctrl= new PeopleContentCtrl(firstName, lastName, picture, biography, birthday, em);
 	
 		if(!ctrl.isError()) {
-			EntityManager em= Dao.createEntityManager("JPA");
+			PeopleContent people= ctrl.getPeople();
 			if(request.getParameter("type") != null && request.getParameter("function") != null) {
 				String type= request.getParameter("type");
 				String function= request.getParameter("function");
@@ -72,12 +80,12 @@ public class SavePeopleContentServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath()+"/people?id="+people.getId());
 				return;
 			}
-			em.close();
 		}
 		
 		request.setAttribute("error", ctrl);
-		System.out.println(ctrl.toString());
 		doGet(request, response);
+		em.close();
+		Dao.close();
 	}
 
 }
