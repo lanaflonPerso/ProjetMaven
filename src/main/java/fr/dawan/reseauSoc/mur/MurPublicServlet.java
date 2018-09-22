@@ -24,8 +24,8 @@ public class MurPublicServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user= (User) request.getSession().getAttribute("user");
 		EntityManager em= Dao.createEntityManager("JPA");
+		User user= (User) request.getSession().getAttribute("user");
 		List<Mur> bricks= UserBo.findBricks(user.getId(), em);
 		
 		request.setAttribute("bricks", bricks);
@@ -33,6 +33,7 @@ public class MurPublicServlet extends HttpServlet {
 		request.setAttribute("page", "/WEB-INF/wall/ViewWallPublic.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 		em.close();
+		Dao.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

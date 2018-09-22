@@ -45,5 +45,6 @@ public class CategoryServlet extends HttpServlet {
 		request.setAttribute("page", "/WEB-INF/category/ViewCategory.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 		em.close();
+		Dao.close();
 	}
 }

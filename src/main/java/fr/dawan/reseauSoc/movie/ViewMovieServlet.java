@@ -1,7 +1,6 @@
 package fr.dawan.reseauSoc.movie;
 
 import java.io.IOException;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
-import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
-import fr.dawan.reseauSoc.like.LikeBo;
 
 @WebServlet("/movie")
 public class ViewMovieServlet extends HttpServlet {
@@ -50,5 +47,6 @@ public class ViewMovieServlet extends HttpServlet {
 		request.setAttribute("page", "/WEB-INF/movie/ViewMovie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 		em.close();
+		Dao.close();
 	}
 }

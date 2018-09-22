@@ -3,6 +3,8 @@ package fr.dawan.reseauSoc.ctrl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.persistence.EntityManager;
+
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.user.UserBo;
 
@@ -17,7 +19,7 @@ public class UserCtrl {
 	private String msgCity;
 	private boolean error= false;
 	
-	public UserCtrl(User user, String pass1, String pass2) {
+	public UserCtrl(User user, String pass1, String pass2, EntityManager em) {
 		this.user= user;
 		setFirstName();
 		setLastName();	
@@ -25,13 +27,12 @@ public class UserCtrl {
 		setPasswordEquals(pass1, pass2);
 		setPasswordLenfth(pass1);
 		if (!error) {
-			userExist();
+			userExist(em);
 		}
 	}
 
-	public void userExist() {
-		System.out.println("email ="+user.getEmail());
-		User userExist= UserBo.findByEmail(user.getEmail());
+	public void userExist(EntityManager em) {
+		User userExist= UserBo.findByEmail(user.getEmail(), em);
 		if (userExist != null) {
 			msgUser= "l'adresse email est déja utilisée";
 			error= true;

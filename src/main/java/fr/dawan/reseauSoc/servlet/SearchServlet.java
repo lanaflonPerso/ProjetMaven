@@ -21,7 +21,6 @@ import fr.dawan.reseauSoc.serie.SerieBo;
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManager em= Dao.createEntityManager("JPA");
 	
     public SearchServlet() {
         super();
@@ -29,6 +28,7 @@ public class SearchServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String value= request.getParameter("search");
+		EntityManager em= Dao.createEntityManager("JPA");
 		
 		List<Movie> movies= MovieBo.findByTitle(value, em);
 		List<PeopleContent> peoples= PeopleContentBo.findByLastName(value, em);
@@ -39,12 +39,8 @@ public class SearchServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/view/Search.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
+		System.out.println("on ferme la connection");
 		em.close();
-	}
-	
+		Dao.close();
+	}	
 }

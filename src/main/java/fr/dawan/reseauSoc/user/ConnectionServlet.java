@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.user;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.dawan.reseauSoc.beans.User;
+import fr.dawan.reseauSoc.dao.Dao;
 
 @WebServlet("/user/connection")
 public class ConnectionServlet extends HttpServlet {
@@ -33,9 +35,13 @@ public class ConnectionServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntityManager em= Dao.createEntityManager("JPA");
 		String email= request.getParameter("email");
 		String password= User.MySQLPassword(request.getParameter("password"));
-		User user= UserBo.findByEmail(email);
+		User user= UserBo.findByEmail(email, em);
+		
+		em.close();
+		Dao.close();
 		if(user != null) {
 			if (password.equals(user.getPassword())) {
 				request.getSession().setAttribute("user", user);

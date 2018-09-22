@@ -34,10 +34,10 @@ public class InscriptionServlet extends HttpServlet {
 		String pass1= request.getParameter("passwordC");
 		String pass2= request.getParameter("password");
 		
-		UserCtrl ctrl= new UserCtrl(user, pass1, pass2);
+		EntityManager em= Dao.createEntityManager("JPA");
+		UserCtrl ctrl= new UserCtrl(user, pass1, pass2, em);
 		if (!ctrl.isError()) {
 			user.setPassword(pass1);
-			EntityManager em= Dao.createEntityManager("JPA");
 			UserBo.saveOrUpdate(user, em);
 			user.setPassword("");
 			request.getSession().setAttribute("user", user);
@@ -46,6 +46,9 @@ public class InscriptionServlet extends HttpServlet {
 		}
 		request.setAttribute("user", user);
 		request.setAttribute("error", ctrl);
+		
+		em.close();
+		Dao.close();
 		doGet(request, response);
 	}
 }

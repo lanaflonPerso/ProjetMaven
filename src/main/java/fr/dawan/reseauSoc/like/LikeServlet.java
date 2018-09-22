@@ -57,6 +57,8 @@ public class LikeServlet extends HttpServlet {
 					Movie movie= MovieBo.findById(Movie.class, likable.getId(), em);
 					mBo.setMovie(movie, user, like, em);
 				}
+				em.close();
+				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
 				return;
 			case "category":
@@ -66,6 +68,8 @@ public class LikeServlet extends HttpServlet {
 					Category category= Dao.findById(Category.class, likable.getId(), em);
 					mBo.setCategory(category, user, like, em);
 				}
+				em.close();
+				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/category?id="+id);
 				return;
 			case "user":
@@ -75,6 +79,8 @@ public class LikeServlet extends HttpServlet {
 					User searchedUser= Dao.findById(User.class, likable.getId(), em);
 					mBo.setUser(searchedUser, user, like, em);
 				}
+				em.close();
+				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/user?id="+id);
 				return;
 			case "people":
@@ -84,15 +90,13 @@ public class LikeServlet extends HttpServlet {
 					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId(), em);
 					mBo.setPeopleContent(people, user, like, em);
 				}
+				em.close();
+				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/people?id="+id);
 				return;
 			default:
 				break;
 			}
-			
-			
-			em.close();
-			Dao.close();
 		}else {
 			response.sendError(403, "Le type de contenu n'est pas cohérent!");
 			return;
