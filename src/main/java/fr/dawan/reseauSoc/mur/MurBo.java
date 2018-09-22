@@ -10,6 +10,7 @@ import fr.dawan.reseauSoc.beans.Likable;
 import fr.dawan.reseauSoc.beans.LikeDislike;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.Mur;
+import fr.dawan.reseauSoc.beans.PeopleContent;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.like.LikeBo;
@@ -93,7 +94,7 @@ public class MurBo extends Dao {
 		wall.setFollowers(LikeBo.findByType(wall.getUser().getId(), em));
 		saveOrUpdate(wall, em);
 	}
-
+	
 	public void setUser(User searchedUser, User user, LikeDislike like, EntityManager em) {
 		findUserLike(searchedUser, user, em);
 		StringBuilder html = new StringBuilder();
@@ -103,6 +104,19 @@ public class MurBo extends Dao {
 			html.append("ne souhaite pas suivre ");
 		}
 		html.append("<a href='"+URL+"user?id="+searchedUser.getId()+"'>"+searchedUser.getFirstName()+" "+searchedUser.getLastName()+"</a>");
+		mur.setHtml(html.toString());
+		saveOrUpdate(mur, em);	
+	}
+	
+	public void setPeopleContent(PeopleContent people, User user, LikeDislike like, EntityManager em) {
+		findUserLike(people, user, em);
+		StringBuilder html = new StringBuilder();
+		if(like.getTypeVote() == 1) {
+			html.append("aime ");
+		} else {
+			html.append("n'aime pas ");
+		}
+		html.append("<a href='"+URL+"people?id="+people.getId()+"'>"+people.getFirstName()+" "+people.getLastName()+"</a>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur, em);	
 	}

@@ -1,6 +1,7 @@
 package fr.dawan.reseauSoc.movie;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
+import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
+import fr.dawan.reseauSoc.like.LikeBo;
 
 @WebServlet("/movie")
 public class ViewMovieServlet extends HttpServlet {
@@ -36,6 +39,9 @@ public class ViewMovieServlet extends HttpServlet {
 			
 			Movie movie= MovieBo.findById(Movie.class, id, em);
 			if(movie != null) {
+				Set<User> followers= LikeBo.findByType(id, em);
+				
+				request.setAttribute("followers", followers);
 				request.setAttribute("error", false);
 				request.setAttribute("movie", movie);
 				request.setAttribute("actors", movie.getActors());

@@ -53,7 +53,7 @@ public class LikeBo extends Dao {
 	
 	@SuppressWarnings("unchecked")
 	public static Set<User> findByType(int likableId, EntityManager em) {		
-		Query query = em.createQuery("SELECT L FROM LikeDislike L WHERE L.likable.id= :id", LikeDislike.class) ;
+		Query query = em.createQuery("SELECT L FROM LikeDislike L WHERE L.likable.id= :id AND L.typeVote= 1", LikeDislike.class) ;
 		query.setParameter("id",  likableId);
 		
 		Set<User> users= new HashSet<>();

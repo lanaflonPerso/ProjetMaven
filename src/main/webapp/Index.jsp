@@ -20,6 +20,10 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+				
+				<div class="col-md-4">
+					<%@ include file="/WEB-INF/follower/ViewFollowers.jsp" %>
+				</div>
 			</div>
 		</div>
 		
