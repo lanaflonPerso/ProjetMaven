@@ -25,6 +25,7 @@
   	<url-pattern>/wall</url-pattern>
   	<url-pattern>/shortcontent</url-pattern>
   	<url-pattern>/comment</url-pattern>
+  	<url-pattern>/message</url-pattern>
   </filter-mapping>
   
  <!-- ********************MAPPING FILTER SEARCH FOLLOWER************* -->

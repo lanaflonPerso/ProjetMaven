@@ -25,7 +25,7 @@ public class Likable {
 	private String type;
 	private int likeCount;
 	private int dislikeCount;
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value=TemporalType.TIMESTAMP)
 	private Date createdDate;
 	
 	/* ****************************************************************************************
