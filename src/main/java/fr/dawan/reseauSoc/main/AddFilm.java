@@ -1,7 +1,5 @@
 package fr.dawan.reseauSoc.main;
 
-import javax.persistence.EntityManager;
-
 import fr.dawan.reseauSoc.beans.Category;
 import fr.dawan.reseauSoc.beans.Function;
 import fr.dawan.reseauSoc.beans.Movie;
@@ -43,12 +41,10 @@ public class AddFilm {
 	}
 	
 	public static void saveMovie() {
-		EntityManager em= Dao.createEntityManager("JPA");
-		Dao.saveOrUpdate(getLesDentsDeLaMer(), em);
-		Dao.saveOrUpdate(getRencontresDuTroisièmeType(), em);
-		Dao.saveOrUpdate(getLArnaque(), em);
-		Dao.saveOrUpdate(getExtravagances(), em);
-		em.close();
+		Dao.saveOrUpdate(getLesDentsDeLaMer());
+		Dao.saveOrUpdate(getRencontresDuTroisièmeType());
+		Dao.saveOrUpdate(getLArnaque());
+		Dao.saveOrUpdate(getExtravagances());
 	}
 	
 	public static PeopleContent getRichardDreyfuss() {

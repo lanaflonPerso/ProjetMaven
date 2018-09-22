@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.serie;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,6 @@ public class ViewSerieServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em= Dao.createEntityManager("JPA");
 		int id= 0;
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Serie Inconnue");
@@ -34,7 +32,7 @@ public class ViewSerieServlet extends HttpServlet {
 				
 			}
 			
-			Serie serie= Dao.findById(Serie.class, id, em);
+			Serie serie= Dao.findById(Serie.class, id);
 			if(serie != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("serie", serie);
@@ -44,7 +42,5 @@ public class ViewSerieServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/serie/ViewSerie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
 	}	
 }

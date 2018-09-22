@@ -41,6 +41,7 @@
 	<url-pattern>/message</url-pattern>
 	<url-pattern>/mailbox</url-pattern>
 	<url-pattern>/mailbox/view</url-pattern>
+	<url-pattern>/album/add</url-pattern>
   	  	
   </filter-mapping>
   
@@ -57,6 +58,28 @@
   	<filter-name>NbrMessage</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>AddAlbumServlet</display-name>
+  	<servlet-name>AddAlbumServlet</servlet-name>
+  	<servlet-class>fr.dawan.reseauSoc.music.AddAlbumServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>ViewAlbumServlet</display-name>
+  	<servlet-name>ViewAlbumServlet</servlet-name>
+  	<servlet-class>fr.dawan.reseauSoc.music.ViewAlbumServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AddAlbumServlet</servlet-name>
+  	<url-pattern>/album/add</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ViewAlbumServlet</servlet-name>
+  	<url-pattern>/album</url-pattern>
+  </servlet-mapping>
 
 <!-- ********************WELCOME FILE******************************* -->
   <welcome-file-list>

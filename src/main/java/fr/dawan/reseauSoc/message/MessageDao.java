@@ -11,7 +11,8 @@ import fr.dawan.reseauSoc.dao.Dao;
 
 public class MessageDao extends Dao {
 	
-	public static void saveOrUpdate(Message message, EntityManager em) {
+	public static void saveOrUpdate(Message message) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -25,6 +26,8 @@ public class MessageDao extends Dao {
 			tx.rollback();
 			e.printStackTrace();
 		}
+		em.close();
+		Dao.close();
 	}
 	
 	public static Message findById(int id, EntityManager em) {

@@ -1,28 +1,26 @@
-package fr.dawan.reseauSoc.people;
+package fr.dawan.reseauSoc.music;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.dawan.reseauSoc.beans.PeopleContent;
+import fr.dawan.reseauSoc.beans.Album;
 import fr.dawan.reseauSoc.dao.Dao;
 
-@WebServlet("/people")
-public class ViewPeopleServlet extends HttpServlet {
+public class ViewAlbumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ViewPeopleServlet() {
+    public ViewAlbumServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id= 0;
 		request.setAttribute("error", true);
-		request.setAttribute("titlePage", "Personalité inconnue");
+		request.setAttribute("titlePage", "Album Inconnue");
 		
 		if(request.getParameter("id") != null) {
 			try {
@@ -31,15 +29,16 @@ public class ViewPeopleServlet extends HttpServlet {
 				
 			}
 			
-			PeopleContent people= Dao.findById(PeopleContent.class, id);
-			if(people != null) {
+			Album album= Dao.findById(Album.class, id);
+			if(album != null) {
 				request.setAttribute("error", false);
-				request.setAttribute("people", people);
-				request.setAttribute("titlePage", people.getFirstName()+" "+people.getLastName());	
+				request.setAttribute("album", album);
+				request.setAttribute("titlePage",album.getBand().getBandName()+" "+album.getTitle());	
 			}
 		}
 		
-		request.setAttribute("page", "/WEB-INF/people/ViewPeople.jsp");
+		request.setAttribute("page", "/WEB-INF/music/ViewAlbum.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
+
 }

@@ -94,7 +94,8 @@ public class LikeBo extends Dao {
 	 * @param em
 	 * @return 
 	 */
-	public static boolean save(LikeDislike like, EntityManager em) {
+	public static boolean save(LikeDislike like) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		boolean result= true;
 		//on verifie si on a deja liker le produit!
 		LikeDislike isLike= myLike(like.getLikable().getId(), like.getUser().getId(), em);
@@ -123,6 +124,8 @@ public class LikeBo extends Dao {
 				LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.dislikeCount= L.dislikeCount-1  WHERE L.id= :id", em);
 			} 
 		}
+		em.close();
+		Dao.close();
 		return result;
 	}
 }

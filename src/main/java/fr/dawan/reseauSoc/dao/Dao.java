@@ -23,7 +23,8 @@ public class Dao {
 		eef.close();
 	}
 
-	public static <T extends Likable> void saveOrUpdate(T item, EntityManager em) {
+	public static <T extends Likable> void saveOrUpdate(T item) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -37,6 +38,8 @@ public class Dao {
 			tx.rollback();
 			e.printStackTrace();
 		}
+		em.close();
+		Dao.close();
 	}
 
 	public <T extends Likable> void delete(T item, EntityManager em) {
@@ -48,13 +51,16 @@ public class Dao {
 		tx.commit();
 	}
 	
-	public static <T extends Likable> T findById(Class<T> clazz, int id, EntityManager em) {
+	public static <T extends Likable> T findById(Class<T> clazz, int id) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		T result= null;
 		try {
 			result=em.find(clazz, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		em.close();
+		Dao.close();
 		return result;
 	}
 }

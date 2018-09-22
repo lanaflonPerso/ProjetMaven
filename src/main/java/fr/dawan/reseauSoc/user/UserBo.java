@@ -12,7 +12,8 @@ import fr.dawan.reseauSoc.dao.Dao;
 
 public class UserBo extends Dao {
 	
-	public static User findByEmail(String email, EntityManager em) {
+	public static User findByEmail(String email) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		User user= null;
 		
 		Query query = em.createQuery("SELECT user FROM User user WHERE user.email = :email");
@@ -21,7 +22,8 @@ public class UserBo extends Dao {
 		if(query.getResultList().size() > 0) {
 			user = (User) query.getResultList().get(0);
 		}
-
+		em.close();
+		Dao.close();
 		return user;
 	}
 	

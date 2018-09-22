@@ -2,8 +2,6 @@ package fr.dawan.reseauSoc.ctrl;
 
 import java.util.Date;
 
-import javax.persistence.EntityManager;
-
 import fr.dawan.reseauSoc.beans.Message;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
@@ -15,16 +13,16 @@ public class MessageCtrl {
 	private String msgContents;
 	private boolean error= false;
 	
-	public MessageCtrl(User sender, int receiverId, String contents, EntityManager em) {
+	public MessageCtrl(User sender, int receiverId, String contents) {
 		message.setSender(sender);
-		searchReceiver(receiverId, em);
+		searchReceiver(receiverId);
 		ctrlContents(contents);
 		message.setCreatedAt(new Date());
 		
 	}
 	
-	public void searchReceiver(int receiverId, EntityManager em) {
-		User receiver= Dao.findById(User.class, receiverId, em);
+	public void searchReceiver(int receiverId) {
+		User receiver= Dao.findById(User.class, receiverId);
 		
 		if(receiver == null) {
 			msg= "Utilisateur inconnue!";

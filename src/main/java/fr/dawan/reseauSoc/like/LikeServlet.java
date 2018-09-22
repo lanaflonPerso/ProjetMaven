@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.like;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,51 +46,41 @@ public class LikeServlet extends HttpServlet {
 			int vote= Integer.valueOf(request.getParameter("like"));
 			like= new LikeDislike(user, likable, vote);
 			
-			EntityManager em= Dao.createEntityManager("JPA");
-			
 			switch (request.getParameter("type")) {
 			case "movie":
-				if(LikeBo.save(like, em)) {
+				if(LikeBo.save(like)) {
 					like.setType("movie");
 					MurBo mBo= new MurBo();
-					Movie movie= MovieBo.findById(Movie.class, likable.getId(), em);
-					mBo.setMovie(movie, user, like, em);
+					Movie movie= MovieBo.findById(Movie.class, likable.getId());
+					mBo.setMovie(movie, user, like);
 				}
-				em.close();
-				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
 				return;
 			case "category":
-				if(LikeBo.save(like, em)) {
+				if(LikeBo.save(like)) {
 					like.setType("category");
 					MurBo mBo= new MurBo();
-					Category category= Dao.findById(Category.class, likable.getId(), em);
-					mBo.setCategory(category, user, like, em);
+					Category category= Dao.findById(Category.class, likable.getId());
+					mBo.setCategory(category, user, like);
 				}
-				em.close();
-				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/category?id="+id);
 				return;
 			case "user":
-				if(LikeBo.save(like, em)) {
+				if(LikeBo.save(like)) {
 					like.setType("user");
 					MurBo mBo= new MurBo();
-					User searchedUser= Dao.findById(User.class, likable.getId(), em);
-					mBo.setUser(searchedUser, user, like, em);
+					User searchedUser= Dao.findById(User.class, likable.getId());
+					mBo.setUser(searchedUser, user, like);
 				}
-				em.close();
-				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/user?id="+id);
 				return;
 			case "people":
-				if(LikeBo.save(like, em)) {
+				if(LikeBo.save(like)) {
 					like.setType("people");
 					MurBo mBo= new MurBo();
-					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId(), em);
-					mBo.setPeopleContent(people, user, like, em);
+					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId());
+					mBo.setPeopleContent(people, user, like);
 				}
-				em.close();
-				Dao.close();
 				response.sendRedirect(request.getContextPath()+"/people?id="+id);
 				return;
 			default:

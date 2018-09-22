@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.people;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Function;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.PeopleContent;
-import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.movie.MovieBo;
 
 @WebServlet("/people/add")
@@ -36,11 +34,8 @@ public class SavePeopleContentServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em= Dao.createEntityManager("JPA");
 		String firstName= request.getParameter("lastName");
 		String lastName= request.getParameter("firstName");
-		System.out.println("nom= "+lastName);
-		System.out.println("prenom = "+firstName );
 		String biography= request.getParameter("biography");
 		String picture= request.getParameter("picture");
 		int birthday = 0;
@@ -50,7 +45,7 @@ public class SavePeopleContentServlet extends HttpServlet {
 		} catch (Exception e) {
 		}
 		
-		PeopleContentCtrl ctrl= new PeopleContentCtrl(firstName, lastName, picture, biography, birthday, em);
+		PeopleContentCtrl ctrl= new PeopleContentCtrl(firstName, lastName, picture, biography, birthday);
 	
 		if(!ctrl.isError()) {
 			PeopleContent people= ctrl.getPeople();
@@ -68,15 +63,15 @@ public class SavePeopleContentServlet extends HttpServlet {
 					if(type.equals("movie")) {
 						Function func= new Function("actor");
 						people.setFunction(func);
-						Movie movie= MovieBo.findById(Movie.class, id, em);
+						Movie movie= MovieBo.findById(Movie.class, id);
 						movie.setActor(people);
-						MovieBo.saveOrUpdate(movie, em);
+						MovieBo.saveOrUpdate(movie);
 						response.sendRedirect(request.getContextPath()+"/movie?id="+movie.getId());
 						return;
 					}
 				}	
 			} else {			
-				PeopleContentBo.saveOrUpdate(people, em);
+				PeopleContentBo.saveOrUpdate(people);
 				response.sendRedirect(request.getContextPath()+"/people?id="+people.getId());
 				return;
 			}
@@ -84,8 +79,6 @@ public class SavePeopleContentServlet extends HttpServlet {
 		
 		request.setAttribute("error", ctrl);
 		doGet(request, response);
-		em.close();
-		Dao.close();
 	}
 
 }

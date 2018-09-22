@@ -1,22 +1,18 @@
 package fr.dawan.reseauSoc.main;
 
-import javax.persistence.EntityManager;
-
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 
 public class AddUser {
 	
 	public static void saveUser() {
-		EntityManager em= Dao.createEntityManager("JPA");
-		Dao.saveOrUpdate(getVianneyBailleux(), em);
-		Dao.saveOrUpdate(getSteveHarris() , em);
-		Dao.saveOrUpdate(getPaulStanley(), em);
-		Dao.saveOrUpdate(getBruceDickinson(), em);
-		Dao.saveOrUpdate(getRobHalford(), em);
-		Dao.saveOrUpdate(getGeneSimmons(), em);
-		Dao.saveOrUpdate(getPeterCarr(), em);
-		em.close();
+		Dao.saveOrUpdate(getVianneyBailleux());
+		Dao.saveOrUpdate(getSteveHarris());
+		Dao.saveOrUpdate(getPaulStanley());
+		Dao.saveOrUpdate(getBruceDickinson());
+		Dao.saveOrUpdate(getRobHalford());
+		Dao.saveOrUpdate(getGeneSimmons());
+		Dao.saveOrUpdate(getPeterCarr());
 	}
 	
 	public static User getVianneyBailleux() {

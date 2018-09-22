@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.user;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.ctrl.UserCtrl;
-import fr.dawan.reseauSoc.dao.Dao;
 
 @WebServlet("/user/inscription")
 public class InscriptionServlet extends HttpServlet {
@@ -34,11 +32,10 @@ public class InscriptionServlet extends HttpServlet {
 		String pass1= request.getParameter("passwordC");
 		String pass2= request.getParameter("password");
 		
-		EntityManager em= Dao.createEntityManager("JPA");
-		UserCtrl ctrl= new UserCtrl(user, pass1, pass2, em);
+		UserCtrl ctrl= new UserCtrl(user, pass1, pass2);
 		if (!ctrl.isError()) {
 			user.setPassword(pass1);
-			UserBo.saveOrUpdate(user, em);
+			UserBo.saveOrUpdate(user);
 			user.setPassword("");
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect(request.getContextPath()+"/");
@@ -47,8 +44,6 @@ public class InscriptionServlet extends HttpServlet {
 		request.setAttribute("user", user);
 		request.setAttribute("error", ctrl);
 		
-		em.close();
-		Dao.close();
 		doGet(request, response);
 	}
 }

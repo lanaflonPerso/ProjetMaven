@@ -2,8 +2,6 @@ package fr.dawan.reseauSoc.people;
 
 import java.util.Date;
 
-import javax.persistence.EntityManager;
-
 import fr.dawan.reseauSoc.beans.PeopleContent;
 
 public class PeopleContentCtrl {
@@ -18,8 +16,8 @@ public class PeopleContentCtrl {
 	private String msgBirthDay;
 	private boolean error= false;
 
-	public PeopleContentCtrl(String firstName, String lastName, String picture, String biography, int birthday, EntityManager em) {
-		peopleExist(firstName, lastName, em);
+	public PeopleContentCtrl(String firstName, String lastName, String picture, String biography, int birthday) {
+		peopleExist(firstName, lastName);
 		ctrlFirstName(firstName);
 		ctrlLastName(lastName);
 		ctrlBiography(biography);
@@ -71,8 +69,8 @@ public class PeopleContentCtrl {
 		people.setPicture(picture);
 	}
 	
-	public void peopleExist(String firstName, String lastName, EntityManager em) {
-		PeopleContent exist= PeopleContentBo.findByName(firstName, lastName, em);
+	public void peopleExist(String firstName, String lastName) {
+		PeopleContent exist= PeopleContentBo.findByName(firstName, lastName);
 		if (exist != null) {
 			msg= "La personnalité existe déja!";
 			error= true;

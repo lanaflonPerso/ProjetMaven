@@ -1,7 +1,5 @@
 package fr.dawan.reseauSoc.main;
 
-import javax.persistence.EntityManager;
-
 import fr.dawan.reseauSoc.beans.Episode;
 import fr.dawan.reseauSoc.beans.Function;
 import fr.dawan.reseauSoc.beans.PeopleContent;
@@ -11,12 +9,10 @@ import fr.dawan.reseauSoc.dao.Dao;
 public class AddSerie {
 	
 	public static void save() {
-		EntityManager em= Dao.createEntityManager("JPA");
-		Dao.saveOrUpdate(getCodeQuantum(), em);
+		Dao.saveOrUpdate(getCodeQuantum());
 		for (Episode ep: getCodeQuantum().getEpisodes()) {
 			System.out.println("Titre= "+ep.getTitle());
 		}
-		em.close();
 	}
 	
 	public static Function acteur= new Function("actor");

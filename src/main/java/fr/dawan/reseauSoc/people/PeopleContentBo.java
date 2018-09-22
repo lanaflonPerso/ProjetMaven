@@ -26,7 +26,9 @@ public class PeopleContentBo extends Dao {
 		return peoples;	
 	}
 	
-	public static PeopleContent findByName(String firstName, String lastName, EntityManager em) {
+	public static PeopleContent findByName(String firstName, String lastName) {
+		EntityManager em= Dao.createEntityManager("JPA");
+		
 		PeopleContent peoples= null;
 		Query query = em.createQuery("SELECT P FROM PeopleContent P WHERE P.lastName= :lastName AND P.firstName= :firstName ") ;
 		query.setParameter("lastName",  lastName);
@@ -36,6 +38,8 @@ public class PeopleContentBo extends Dao {
 			peoples= (PeopleContent) query.getResultList().get(0);
 		}
 		
+		em.close();
+		Dao.close();
 		return peoples;
 	}
 	

@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.category;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +20,6 @@ public class CategoryServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em= Dao.createEntityManager("JPA");
-		
 		int id= 0;
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Categorie Inconnue");
@@ -34,7 +31,7 @@ public class CategoryServlet extends HttpServlet {
 				
 			}
 			
-			Category category= Dao.findById(Category.class, id, em);
+			Category category= Dao.findById(Category.class, id);
 			if(category != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("category", category);
@@ -44,7 +41,5 @@ public class CategoryServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/category/ViewCategory.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
 	}
 }

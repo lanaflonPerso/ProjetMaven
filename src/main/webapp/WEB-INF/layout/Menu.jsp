@@ -7,29 +7,35 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link"
-				href="<c:url value= "/wall" />">Mon Mur<span
-					class="sr-only">(current)</span></a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="<c:url value= "/mur/public" />">Mur Public</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">user= ${ sessionScope.user.lastName }</a>
+			<li class="nav-item active">
+				<a class="nav-link"	href="<c:url value= "/wall" />">Mon Mur
+					<span class="sr-only">(current)</span>
+				</a>
 			</li>
-
-			<%--                Menu Utilisateur              --%>
-
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#"
-				id="navbarDropdownMenuLink" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false"> Recherche </a>
+			<li class="nav-item">
+				<a class="nav-link"	href="<c:url value= "/mur/public" />">Mur Public</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">user= ${ sessionScope.user.lastName }</a>
+			</li>
+			
+<%--***********************************Menu Utilisateur***********************************--%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Recherche
+				</a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item"
-						href="<c:url value= "/utilisateur/recherche" />">Un
-						Utilisateur</a> <a class="dropdown-item"
-						href="<c:url value= "/film/recherche" />">Un Film</a>
-				</div></li>
-			<li class="nav-item"><c:if
-					test="${ not empty sessionScope.user.id }">
+					<a class="dropdown-item" href="<c:url value= "/utilisateur/recherche" />">
+						Un Utilisateur
+					</a>
+					
+					<a class="dropdown-item" href="<c:url value= "/film/recherche" />">Un Film</a>
+				</div>
+			</li>
+			
+			<li class="nav-item">
+				<c:if test="${ not empty sessionScope.user.id }">
 					<c:choose>
 						<c:when test="${ category == 'films'}">
 							<a href="<c:url value= "/film/ajout" />"><i
@@ -40,25 +46,27 @@
 								class="fas fa-plus-circle"></i></a>
 						</c:when>
 					</c:choose>
-				</c:if></li>
-			<%--                Menu Ajout              --%>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#"
-				id="navbarDropdownMenuLink" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false"> Ajout</a>
+				</c:if>
+			</li>
+<%--***********************************Menu Ajout***********************************--%>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"	aria-haspopup="true" aria-expanded="false">
+					Ajout
+				</a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="<c:url value= "/movie/add" />">Film</a>
-					<a class="dropdown-item" href="<c:url value= "/film/recherche" />">Un
-						Film</a>
-				</div></li>
+					<a class="dropdown-item" href="<c:url value= "/album/add" />">Album</a>
+				</div>
+			</li>
+			
 			<li class="nav-item">
 				<c:if test="${ not empty sessionScope.user.id }">
 					<a class="nav-link"	href="<c:url value = "/mailbox" />">${ nbrMessage } messages</a>
 				</c:if>
 			</li>
-			<li class="nav-item"><c:if
-					test="${ not empty sessionScope.user.id }">
+			<li class="nav-item">
+				<c:if test="${ not empty sessionScope.user.id }">
 					<c:choose>
 						<c:when test="${ category == 'films'}">
 							<a href="<c:url value= "/film/ajout" />"><i
@@ -69,7 +77,8 @@
 								class="fas fa-plus-circle"></i></a>
 						</c:when>
 					</c:choose>
-				</c:if></li>
+				</c:if>
+			</li>
 			<li class="nav-item"><c:choose>
 					<c:when test="${ not empty sessionScope.user.id }">
 						<a class="nav-link"

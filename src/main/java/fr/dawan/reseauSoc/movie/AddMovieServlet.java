@@ -2,7 +2,6 @@ package fr.dawan.reseauSoc.movie;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +40,7 @@ public class AddMovieServlet extends HttpServlet {
 		
 		MovieCtrl ctrl= new MovieCtrl(movie);
 		if(!ctrl.isError()) {
-			EntityManager em= Dao.createEntityManager("JPA");
-			Dao.saveOrUpdate(movie, em);
+			Dao.saveOrUpdate(movie);
 			response.sendRedirect(request.getContextPath()+"/movie?id="+movie.getId());
 			return;
 		}		

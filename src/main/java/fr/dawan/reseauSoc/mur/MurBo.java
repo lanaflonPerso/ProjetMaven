@@ -30,7 +30,8 @@ public class MurBo extends Dao {
 		return result;
 	}
 	
-	public static void saveOrUpdate(Mur item, EntityManager em) {
+	public static void saveOrUpdate(Mur item) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		EntityTransaction tx= em.getTransaction();
 		try {
 			tx.begin();
@@ -44,6 +45,8 @@ public class MurBo extends Dao {
 			tx.rollback();
 			e.printStackTrace();
 		}
+		em.close();
+		Dao.close();
 	}
 
 	private <T extends Likable> void findUserLike(T item, User user, EntityManager em) {
@@ -61,7 +64,8 @@ public class MurBo extends Dao {
 	 * @param user
 	 * @param em
 	 */
-	public void setMovie(Movie movie, User user, LikeDislike like,EntityManager em) {
+	public void setMovie(Movie movie, User user, LikeDislike like) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		findUserLike(movie, user, em);
 		for (Category category: movie.getCategorys()) {
 			mur.setFollowers(LikeBo.findByType(category.getId(), em));
@@ -74,10 +78,13 @@ public class MurBo extends Dao {
 			html.append("n'aime pas le film <a href='"+URL+"movie?id="+movie.getId()+"'>"+movie.getTitle()+" "+movie.getReleaseDate()+"</a>");
 		}
 		mur.setHtml(html.toString());
-		saveOrUpdate(mur, em);
+		saveOrUpdate(mur);
+		em.close();
+		Dao.close();
 	}
 
-	public void setCategory(Category category, User user, LikeDislike like, EntityManager em) {
+	public void setCategory(Category category, User user, LikeDislike like) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		findUserLike(category, user, em);
 		StringBuilder html= new StringBuilder();
 		if(like.getTypeVote() == 1) {
@@ -86,16 +93,19 @@ public class MurBo extends Dao {
 			html.append("n'aime pas le genre <a href='"+URL+"category?id="+category.getId()+"'>"+category.getName()+"</a>");
 		}
 		mur.setHtml(html.toString());
-		saveOrUpdate(mur, em);
+		saveOrUpdate(mur);
 		
+		em.close();
+		Dao.close();		
 	}
 	
 	public static void setShorContent(Mur wall, EntityManager em) {
 		wall.setFollowers(LikeBo.findByType(wall.getUser().getId(), em));
-		saveOrUpdate(wall, em);
+		saveOrUpdate(wall);
 	}
 	
-	public void setUser(User searchedUser, User user, LikeDislike like, EntityManager em) {
+	public void setUser(User searchedUser, User user, LikeDislike like) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		findUserLike(searchedUser, user, em);
 		StringBuilder html = new StringBuilder();
 		if(like.getTypeVote() == 1) {
@@ -105,10 +115,14 @@ public class MurBo extends Dao {
 		}
 		html.append("<a href='"+URL+"user?id="+searchedUser.getId()+"'>"+searchedUser.getFirstName()+" "+searchedUser.getLastName()+"</a>");
 		mur.setHtml(html.toString());
-		saveOrUpdate(mur, em);	
+		saveOrUpdate(mur);
+		
+		em.close();
+		Dao.close();
 	}
 	
-	public void setPeopleContent(PeopleContent people, User user, LikeDislike like, EntityManager em) {
+	public void setPeopleContent(PeopleContent people, User user, LikeDislike like) {
+		EntityManager em= Dao.createEntityManager("JPA");
 		findUserLike(people, user, em);
 		StringBuilder html = new StringBuilder();
 		if(like.getTypeVote() == 1) {
@@ -118,6 +132,6 @@ public class MurBo extends Dao {
 		}
 		html.append("<a href='"+URL+"people?id="+people.getId()+"'>"+people.getFirstName()+" "+people.getLastName()+"</a>");
 		mur.setHtml(html.toString());
-		saveOrUpdate(mur, em);	
+		saveOrUpdate(mur);	
 	}
 }

@@ -38,7 +38,7 @@ public class ConnectionServlet extends HttpServlet {
 		EntityManager em= Dao.createEntityManager("JPA");
 		String email= request.getParameter("email");
 		String password= User.MySQLPassword(request.getParameter("password"));
-		User user= UserBo.findByEmail(email, em);
+		User user= UserBo.findByEmail(email);
 		
 		em.close();
 		Dao.close();
