@@ -39,7 +39,7 @@ public class MessageDao extends Dao {
 
 	@SuppressWarnings("unchecked")
 	public static List<Message> findAll(int receiverId, EntityManager em) {	
-		Query query = em.createQuery("SELECT M FROM Message M WHERE M.receiver.id = :receiverId", Message.class) ; //ORDER BY createdAt DESC
+		Query query = em.createQuery("SELECT M FROM Message M WHERE M.receiver.id = :receiverId ORDER BY createdAt DESC", Message.class);
 		query.setParameter("receiverId",  receiverId);
 		
 		List<Message> messages = query.getResultList();
@@ -56,5 +56,13 @@ public class MessageDao extends Dao {
 		tx.commit();
 	}
 	
+	public static long countMessage(int receiverId, EntityManager em) {
+		Query query = em.createQuery("SELECT COUNT(M.id) FROM Message M WHERE M.receiver.id = :receiverId");
+		query.setParameter("receiverId", receiverId);
+		long count= (long) query.getSingleResult();
+		
+		return count;
+		
+	}
 	
 }

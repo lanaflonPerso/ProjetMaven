@@ -52,6 +52,11 @@
 					<a class="dropdown-item" href="<c:url value= "/film/recherche" />">Un
 						Film</a>
 				</div></li>
+			<li class="nav-item">
+				<c:if test="${ not empty sessionScope.user.id }">
+					<a class="nav-link"	href="<c:url value = "/mailbox" />">${ nbrMessage } messages</a>
+				</c:if>
+			</li>
 			<li class="nav-item"><c:if
 					test="${ not empty sessionScope.user.id }">
 					<c:choose>
