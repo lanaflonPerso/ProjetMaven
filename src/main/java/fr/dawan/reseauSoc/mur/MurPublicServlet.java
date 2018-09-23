@@ -18,13 +18,13 @@ import fr.dawan.reseauSoc.user.UserBo;
 @WebServlet("/wall")
 public class MurPublicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	EntityManager em= Dao.createEntityManager("JPA");   
+	
     public MurPublicServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em= Dao.createEntityManager("JPA");
 		User user= (User) request.getSession().getAttribute("user");
 		List<Mur> bricks= UserBo.findBricks(user.getId(), em);
 		
@@ -32,8 +32,7 @@ public class MurPublicServlet extends HttpServlet {
 
 		request.setAttribute("page", "/WEB-INF/wall/ViewWallPublic.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

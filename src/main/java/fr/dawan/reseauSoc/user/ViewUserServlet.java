@@ -28,14 +28,13 @@ public class ViewUserServlet extends HttpServlet {
 		int id= 0;
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Utilisateur Inconnue");
-		
 		if(request.getParameter("id") != null) {
 			try {
 				id= Integer.valueOf(request.getParameter("id"));	
 			} catch (Exception e) {
 				
 			}
-			List<Mur> bricks= UserBo.findMyBricks(id, em );
+			List<Mur> bricks= UserBo.findMyBricks(id, em);
 			if (bricks.size() > 0) {
 				User searchedUser= bricks.get(0).getUser();
 				request.setAttribute("error", false);
@@ -49,8 +48,6 @@ public class ViewUserServlet extends HttpServlet {
 		}		
 		request.setAttribute("page", "/WEB-INF/user/ViewUser.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 }

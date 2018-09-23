@@ -40,8 +40,7 @@ public class ConnectionServlet extends HttpServlet {
 		String password= User.MySQLPassword(request.getParameter("password"));
 		User user= UserBo.findByEmail(email);
 		
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		if(user != null) {
 			if (password.equals(user.getPassword())) {
 				request.getSession().setAttribute("user", user);

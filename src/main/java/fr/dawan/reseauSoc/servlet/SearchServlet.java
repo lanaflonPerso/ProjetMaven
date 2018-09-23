@@ -42,7 +42,6 @@ public class SearchServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/view/Search.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}	
 }

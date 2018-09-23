@@ -1,7 +1,5 @@
 package fr.dawan.reseauSoc.movie;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -22,18 +20,7 @@ public class MovieBo extends Dao {
 		if(query.getResultList().size() > 0) {
 			movie = (Movie) query.getResultList().get(0);
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		return movie;	
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public static List<Movie> findByTitle(String title, EntityManager em) {	
-//		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title LIKE :title") ;
-//		query.setParameter("title",  "%"+title+"%");
-//		
-//		List<Movie> movies = query.getResultList();
-//		
-//		return movies;	
-//	}
 }

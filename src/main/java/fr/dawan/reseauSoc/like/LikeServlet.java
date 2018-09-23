@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.like;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,8 +52,10 @@ public class LikeServlet extends HttpServlet {
 				if(LikeBo.save(like)) {
 					like.setType("movie");
 					MurBo mBo= new MurBo();
-					Movie movie= MovieBo.findById(Movie.class, likable.getId());
+					EntityManager em= Dao.createEntityManager("JPA");
+					Movie movie= MovieBo.findById(Movie.class, likable.getId(), em);
 					mBo.setMovie(movie, user, like);
+					Dao.close(em);
 				}
 				response.sendRedirect(request.getContextPath()+"/movie?id="+id);
 				return;
@@ -60,7 +63,9 @@ public class LikeServlet extends HttpServlet {
 				if(LikeBo.save(like)) {
 					like.setType("category");
 					MurBo mBo= new MurBo();
-					Category category= Dao.findById(Category.class, likable.getId());
+					EntityManager em= Dao.createEntityManager("JPA");
+					Category category= Dao.findById(Category.class, likable.getId(), em);
+					Dao.close(em);
 					mBo.setCategory(category, user, like);
 				}
 				response.sendRedirect(request.getContextPath()+"/category?id="+id);
@@ -69,7 +74,9 @@ public class LikeServlet extends HttpServlet {
 				if(LikeBo.save(like)) {
 					like.setType("user");
 					MurBo mBo= new MurBo();
-					User searchedUser= Dao.findById(User.class, likable.getId());
+					EntityManager em= Dao.createEntityManager("JPA");
+					User searchedUser= Dao.findById(User.class, likable.getId(), em);
+					Dao.close(em);
 					mBo.setUser(searchedUser, user, like);
 				}
 				response.sendRedirect(request.getContextPath()+"/user?id="+id);
@@ -78,7 +85,9 @@ public class LikeServlet extends HttpServlet {
 				if(LikeBo.save(like)) {
 					like.setType("people");
 					MurBo mBo= new MurBo();
-					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId());
+					EntityManager em= Dao.createEntityManager("JPA");
+					PeopleContent people= Dao.findById(PeopleContent.class, likable.getId(), em);
+					Dao.close(em);
 					mBo.setPeopleContent(people, user, like);
 				}
 				response.sendRedirect(request.getContextPath()+"/people?id="+id);

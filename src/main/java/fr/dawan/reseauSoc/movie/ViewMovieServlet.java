@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.movie;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.dawan.reseauSoc.beans.Movie;
+import fr.dawan.reseauSoc.dao.Dao;
 
 @WebServlet("/movie")
 public class ViewMovieServlet extends HttpServlet {
@@ -23,14 +25,15 @@ public class ViewMovieServlet extends HttpServlet {
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Film Inconnue");
 		
+		EntityManager em= Dao.createEntityManager("JPA");
 		if(request.getParameter("id") != null) {
 			try {
 				id= Integer.valueOf(request.getParameter("id"));	
 			} catch (Exception e) {
-				
+				Dao.close(em);
+				e.printStackTrace();
 			}
-			
-			Movie movie= MovieBo.findById(Movie.class, id);
+			Movie movie= MovieBo.findById(Movie.class, id, em);
 			if(movie != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("movie", movie);
@@ -42,5 +45,6 @@ public class ViewMovieServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/movie/ViewMovie.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
+		Dao.close(em);
 	}
 }

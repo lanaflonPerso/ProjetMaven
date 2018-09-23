@@ -45,8 +45,7 @@ public class MailBoxServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/message/ViewMailBox.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();	
+		Dao.close(em);	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

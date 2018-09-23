@@ -18,8 +18,7 @@ public class MusicDao extends Dao {
 		if(query.getResultList().size() > 0) {
 			group= (GroupMusic) query.getResultList().get(0);
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		return group;	
 	}
 }

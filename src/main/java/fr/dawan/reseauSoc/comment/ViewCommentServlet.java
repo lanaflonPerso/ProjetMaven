@@ -43,8 +43,7 @@ public class ViewCommentServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/comment/ViewComment.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -76,7 +75,6 @@ public class ViewCommentServlet extends HttpServlet {
 		request.setAttribute("error", ctrl);
 		request.setAttribute("page", "/WEB-INF/comment/ViewComment.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 }

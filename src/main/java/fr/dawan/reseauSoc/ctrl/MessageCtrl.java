@@ -2,6 +2,8 @@ package fr.dawan.reseauSoc.ctrl;
 
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+
 import fr.dawan.reseauSoc.beans.Message;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
@@ -22,8 +24,9 @@ public class MessageCtrl {
 	}
 	
 	public void searchReceiver(int receiverId) {
-		User receiver= Dao.findById(User.class, receiverId);
-		
+		EntityManager em= Dao.createEntityManager("JPA");
+		User receiver= Dao.findById(User.class, receiverId, em);
+		Dao.close(em);
 		if(receiver == null) {
 			msg= "Utilisateur inconnue!";
 			error= true;

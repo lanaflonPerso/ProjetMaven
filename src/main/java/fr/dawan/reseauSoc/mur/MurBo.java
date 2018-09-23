@@ -45,8 +45,7 @@ public class MurBo extends Dao {
 			tx.rollback();
 			e.printStackTrace();
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 
 	private <T extends Likable> void findUserLike(T item, User user, EntityManager em) {
@@ -79,8 +78,7 @@ public class MurBo extends Dao {
 		}
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 
 	public void setCategory(Category category, User user, LikeDislike like) {
@@ -95,8 +93,7 @@ public class MurBo extends Dao {
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur);
 		
-		em.close();
-		Dao.close();		
+		Dao.close(em);		
 	}
 	
 	public static void setShorContent(Mur wall, EntityManager em) {
@@ -116,9 +113,8 @@ public class MurBo extends Dao {
 		html.append("<a href='"+URL+"user?id="+searchedUser.getId()+"'>"+searchedUser.getFirstName()+" "+searchedUser.getLastName()+"</a>");
 		mur.setHtml(html.toString());
 		saveOrUpdate(mur);
-		
-		em.close();
-		Dao.close();
+
+		Dao.close(em);
 	}
 	
 	public void setPeopleContent(PeopleContent people, User user, LikeDislike like) {

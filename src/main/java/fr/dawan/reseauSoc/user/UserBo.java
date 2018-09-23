@@ -22,8 +22,7 @@ public class UserBo extends Dao {
 		if(query.getResultList().size() > 0) {
 			user = (User) query.getResultList().get(0);
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		return user;
 	}
 	

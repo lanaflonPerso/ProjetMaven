@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.music;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ public class ViewAlbumServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntityManager em= Dao.createEntityManager("JPA");
 		int id= 0;
 		request.setAttribute("error", true);
 		request.setAttribute("titlePage", "Album Inconnue");
@@ -29,7 +31,7 @@ public class ViewAlbumServlet extends HttpServlet {
 				
 			}
 			
-			Album album= Dao.findById(Album.class, id);
+			Album album= Dao.findById(Album.class, id, em);
 			if(album != null) {
 				request.setAttribute("error", false);
 				request.setAttribute("album", album);
@@ -39,6 +41,7 @@ public class ViewAlbumServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/music/ViewAlbum.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
+		Dao.close(em);
 	}
 
 }

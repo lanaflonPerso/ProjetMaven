@@ -26,8 +26,7 @@ public class MessageDao extends Dao {
 			tx.rollback();
 			e.printStackTrace();
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 	
 	public static Message findById(int id, EntityManager em) {

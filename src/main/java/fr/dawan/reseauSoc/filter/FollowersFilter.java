@@ -41,9 +41,7 @@ public class FollowersFilter implements Filter {
 				res.sendError(404, "Contenu introuvable");
 			}
         }
-        
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		chain.doFilter(request, response);
 	}
 

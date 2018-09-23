@@ -124,8 +124,7 @@ public class LikeBo extends Dao {
 				LikeBo.like(like.getLikable().getId(), "UPDATE Likable L SET L.dislikeCount= L.dislikeCount-1  WHERE L.id= :id", em);
 			} 
 		}
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		return result;
 	}
 }

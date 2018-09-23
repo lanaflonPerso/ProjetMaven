@@ -2,6 +2,7 @@ package fr.dawan.reseauSoc.people;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Function;
 import fr.dawan.reseauSoc.beans.Movie;
 import fr.dawan.reseauSoc.beans.PeopleContent;
+import fr.dawan.reseauSoc.dao.Dao;
 import fr.dawan.reseauSoc.movie.MovieBo;
 
 @WebServlet("/people/add")
@@ -63,7 +65,9 @@ public class SavePeopleContentServlet extends HttpServlet {
 					if(type.equals("movie")) {
 						Function func= new Function("actor");
 						people.setFunction(func);
-						Movie movie= MovieBo.findById(Movie.class, id);
+						EntityManager em= Dao.createEntityManager("JPA");
+						Movie movie= MovieBo.findById(Movie.class, id, em);
+						Dao.close(em);
 						movie.setActor(people);
 						MovieBo.saveOrUpdate(movie);
 						response.sendRedirect(request.getContextPath()+"/movie?id="+movie.getId());

@@ -38,24 +38,7 @@ public class PeopleContentBo extends Dao {
 			peoples= (PeopleContent) query.getResultList().get(0);
 		}
 		
-		em.close();
-		Dao.close();
+		Dao.close(em);
 		return peoples;
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public static PeopleContent SelectById(int id, Session session) {
-//		PeopleContent result= null;
-//		
-//		Criteria criteria = session.createCriteria(PeopleContent.class);
-//		Criterion critere = Restrictions.eq("peopleContent_id", id);
-//		criteria.add(critere);
-//		List<PeopleContent> peoples= (List<PeopleContent>) criteria.list();
-//		
-//		if (peoples.size() > 0) {
-//			result= (PeopleContent) peoples.get(0);
-//		}
-//		
-//		return result;
-//	}
 }

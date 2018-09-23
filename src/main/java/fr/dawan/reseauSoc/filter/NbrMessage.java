@@ -34,8 +34,7 @@ public class NbrMessage implements Filter {
         	User user= (User) req.getSession().getAttribute("user");
         	long nbrMessage= MessageDao.countMessage(user.getId(), em);
         	req.getSession().setAttribute("nbrMessage", nbrMessage);
-        	em.close();
-    		Dao.close();	
+    		Dao.close(em);	
         }
         chain.doFilter(request, response);
 	}

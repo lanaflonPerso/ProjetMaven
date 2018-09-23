@@ -35,7 +35,6 @@ public class ViewMessageServlet extends HttpServlet {
 		
 		request.setAttribute("page", "/WEB-INF/message/ViewMessage.jsp");
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
-		em.close();
-		Dao.close();
+		Dao.close(em);
 	}
 }
