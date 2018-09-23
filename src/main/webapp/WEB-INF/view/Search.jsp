@@ -67,5 +67,28 @@
 				</tbody>
 			</table>
 		</c:if>
+		
+		<c:if test="${ not empty albums }">
+			<h1>Les Series</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<td>Groupe</td>
+						<td>Titre</td>
+						<td>Date de réalisation</td>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<c:forEach items="${ albums }" var="album">
+						<tr>
+							<td>${ album.band.bandName }</td>
+							<td><a href='<c:url value="/album?id=${ album.id }" />'>${ album.title }</a></td>
+							<td>${ album.releaseDate }</td>
+						</tr>
+					</c:forEach>	
+				</tbody>
+			</table>
+		</c:if>
 	</div>
 </div>

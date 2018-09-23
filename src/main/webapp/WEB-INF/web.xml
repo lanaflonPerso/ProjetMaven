@@ -51,6 +51,7 @@
   	<url-pattern>/people</url-pattern>
   	<url-pattern>/movie</url-pattern>
   	<url-pattern>/user</url-pattern>
+  	<url-pattern>/album</url-pattern>
   </filter-mapping>
   	
 <!-- ********************MAPPING FILTER NOMBRE MESSAGE************** -->

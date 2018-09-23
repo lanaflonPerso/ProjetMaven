@@ -1,9 +1,12 @@
 package fr.dawan.reseauSoc.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import fr.dawan.reseauSoc.beans.Likable;
 
@@ -62,5 +65,22 @@ public class Dao {
 		em.close();
 		Dao.close();
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Likable> List<T> findByTitle(Class<T> clazz, String item, String title) {
+		EntityManager em= Dao.createEntityManager("JPA");
+		List<T> result= null;
+		try {
+			Query query = em.createQuery("SELECT I FROM "+item+" I WHERE I.title LIKE :title", clazz) ;
+			query.setParameter("title",  "%"+title+"%");
+			result = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		Dao.close();
+		return result;	
+	
 	}
 }

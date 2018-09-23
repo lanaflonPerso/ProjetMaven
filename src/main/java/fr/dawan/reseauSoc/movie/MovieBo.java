@@ -27,13 +27,13 @@ public class MovieBo extends Dao {
 		return movie;	
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static List<Movie> findByTitle(String title, EntityManager em) {	
-		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title LIKE :title") ;
-		query.setParameter("title",  "%"+title+"%");
-		
-		List<Movie> movies = query.getResultList();
-		
-		return movies;	
-	}
+//	@SuppressWarnings("unchecked")
+//	public static List<Movie> findByTitle(String title, EntityManager em) {	
+//		Query query = em.createQuery("SELECT movie FROM Movie movie WHERE movie.title LIKE :title") ;
+//		query.setParameter("title",  "%"+title+"%");
+//		
+//		List<Movie> movies = query.getResultList();
+//		
+//		return movies;	
+//	}
 }
