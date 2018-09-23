@@ -46,10 +46,6 @@ public class Likable {
 	public Integer getId() {
 		return id;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public int getLikeCount() {
 		return likeCount;
 	}

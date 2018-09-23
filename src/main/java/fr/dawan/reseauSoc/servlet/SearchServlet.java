@@ -30,10 +30,10 @@ public class SearchServlet extends HttpServlet {
 		String value= request.getParameter("search");
 		EntityManager em= Dao.createEntityManager("JPA");
 		
-		List<Movie> movies= Dao.findByTitle(Movie.class, "Movie", value);
+		List<Movie> movies= Dao.findByTitle(Movie.class, "Movie", value, em);
 		List<PeopleContent> peoples= PeopleContentBo.findByLastName(value, em);
-		List<Serie> series= Dao.findByTitle(Serie.class, "Serie", value);
-		List<Album> albums= (List<Album>) Dao.findByTitle(Album.class, "Album", value);
+		List<Serie> series= Dao.findByTitle(Serie.class, "Serie", value, em);
+		List<Album> albums= (List<Album>) Dao.findByTitle(Album.class, "Album", value, em);
 		
 		request.setAttribute("movies", movies);
 		request.setAttribute("peoples", peoples);

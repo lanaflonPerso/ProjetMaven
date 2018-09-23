@@ -33,11 +33,13 @@ public class LikeServlet extends HttpServlet {
 		if(request.getParameter("like").equals("1") || request.getParameter("like").equals("-1")) {
 			User user= (User) request.getSession().getAttribute("user");
 			
-			Likable likable= new Likable();
+			Likable likable;
 			LikeDislike like = null;
 			try {
 				id= Integer.valueOf(request.getParameter("id"));
-				likable.setId(id);
+				EntityManager em1= Dao.createEntityManager("JPA");
+				likable= Dao.findById(Likable.class, id, em1);
+				Dao.close(em1);
 			} catch (Exception e) {
 				response.sendError(400, "L'id n'est pas cohérent");
 				return;

@@ -75,8 +75,22 @@ public class Dao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Dao.close(em);
-		return result;	
+		System.out.println("on ferme la connection!");
+		close(em);
+		return result;
+	}
 	
+	@SuppressWarnings("unchecked")
+	public static <T extends Likable> List<T> findByTitle(Class<T> clazz, String item, String title, EntityManager em) {
+		List<T> result= null;
+		try {
+			Query query = em.createQuery("SELECT I FROM "+item+" I WHERE I.title LIKE :title", clazz) ;
+			query.setParameter("title",  "%"+title+"%");
+			result = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("on ferme la connection!");
+		return result;
 	}
 }

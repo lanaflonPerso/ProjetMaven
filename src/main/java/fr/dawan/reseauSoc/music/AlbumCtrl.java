@@ -41,6 +41,11 @@ public class AlbumCtrl extends Ctrl {
 		} else {
 			GroupMusic group= MusicDao.findByBand(bandName);
 			if (group != null) {
+				System.out.println("ùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù");
+				System.out.println("ùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù");
+				System.out.println("ùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù");
+				System.out.println("ùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùù");
+				System.out.println("le groupe existe= "+group.getId());
 				album.setBand(group);
 			} else {
 				GroupMusic newGroup= new GroupMusic(bandName);

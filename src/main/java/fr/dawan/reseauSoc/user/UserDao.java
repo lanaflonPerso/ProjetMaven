@@ -10,7 +10,7 @@ import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
 
-public class UserBo extends Dao {
+public class UserDao extends Dao {
 	
 	public static User findByEmail(String email) {
 		EntityManager em= Dao.createEntityManager("JPA");

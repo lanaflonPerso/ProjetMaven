@@ -34,7 +34,7 @@ public class ViewUserServlet extends HttpServlet {
 			} catch (Exception e) {
 				
 			}
-			List<Mur> bricks= UserBo.findMyBricks(id, em);
+			List<Mur> bricks= UserDao.findMyBricks(id, em);
 			if (bricks.size() > 0) {
 				User searchedUser= bricks.get(0).getUser();
 				request.setAttribute("error", false);

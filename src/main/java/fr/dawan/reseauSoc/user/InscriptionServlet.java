@@ -35,7 +35,7 @@ public class InscriptionServlet extends HttpServlet {
 		UserCtrl ctrl= new UserCtrl(user, pass1, pass2);
 		if (!ctrl.isError()) {
 			user.setPassword(pass1);
-			UserBo.saveOrUpdate(user);
+			UserDao.saveOrUpdate(user);
 			user.setPassword("");
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect(request.getContextPath()+"/");

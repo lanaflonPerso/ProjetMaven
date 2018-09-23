@@ -6,14 +6,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Album")
+@Table(name="Song")
 public class Song extends GroupMusic {
 	
 	private String title;
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Album album;
 	private int number;
-	private int duration;
+//	@Column(nullable=true)
+//	private int duration;
 	
 	
 	/* ****************************************************************************************
@@ -25,12 +26,12 @@ public class Song extends GroupMusic {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public int getDuration() {
-		return duration;
-	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
+//	public int getDuration() {
+//		return duration;
+//	}
+//	public void setDuration(int duration) {
+//		this.duration = duration;
+//	}
 	public String getTitle() {
 		return title;
 	}

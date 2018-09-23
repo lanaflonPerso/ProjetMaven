@@ -13,20 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import fr.dawan.reseauSoc.beans.Mur;
 import fr.dawan.reseauSoc.beans.User;
 import fr.dawan.reseauSoc.dao.Dao;
-import fr.dawan.reseauSoc.user.UserBo;
+import fr.dawan.reseauSoc.user.UserDao;
 
 @WebServlet("/wall")
 public class MurPublicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	EntityManager em= Dao.createEntityManager("JPA");   
 	
     public MurPublicServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntityManager em= Dao.createEntityManager("JPA");   
 		User user= (User) request.getSession().getAttribute("user");
-		List<Mur> bricks= UserBo.findBricks(user.getId(), em);
+		
+		List<Mur> bricks= UserDao.findBricks(user.getId(), em);
 		
 		request.setAttribute("bricks", bricks);
 

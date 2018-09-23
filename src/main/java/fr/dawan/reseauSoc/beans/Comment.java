@@ -16,7 +16,6 @@ public class Comment {
 
 	@Id
 	@GeneratedValue
-	@Column(name="Comment_id")
 	private Integer id;
 	@ManyToOne
 	private Mur wall;
